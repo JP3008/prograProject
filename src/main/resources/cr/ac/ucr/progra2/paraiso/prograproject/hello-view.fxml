@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1063.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.HelloController">>
+   <center>
+      <AnchorPane prefHeight="660.0" prefWidth="1170.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="194.0" prefWidth="1063.0">
+               <children>
+                  <Label layoutX="273.0" layoutY="74.0" text="Catálogo de patrones de software ">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutY="194.0" prefHeight="464.0" prefWidth="1063.0">
+               <children>
+                  <Label layoutX="410.0" layoutY="39.0" text="Seleccion la opción">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="357.0" layoutY="111.0" mnemonicParsing="false" onAction="#crearPatron" prefHeight="39.0" prefWidth="349.0" text="Crear patrón">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="357.0" layoutY="186.0" mnemonicParsing="false" onAction="#buscarPatron" prefHeight="39.0" prefWidth="349.0" text="Buscar patron ">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="356.0" layoutY="260.0" mnemonicParsing="false" onAction="#salir" prefHeight="39.0" prefWidth="349.0" text="Salir ">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children></AnchorPane>
+   </center>
+</BorderPane>
