@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="1159.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.IniciarSesion">
+   <center>
+      <AnchorPane prefHeight="652.0" prefWidth="1173.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutY="-2.0" prefHeight="694.0" prefWidth="1159.0" style="-fx-background-color: #1693a5;">
+               <children>
+                  <Pane layoutX="310.0" layoutY="140.0" prefHeight="414.0" prefWidth="539.0" style="-fx-background-color: #e5e5e5;">
+                     <children>
+                        <Label layoutX="29.0" layoutY="27.0" prefHeight="64.0" prefWidth="482.0" text="Catálogo de patrones de software">
+                           <font>
+                              <Font name="Century Gothic" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="224.0" layoutY="97.0" prefHeight="30.0" prefWidth="92.0" text="Usuario">
+                           <font>
+                              <Font name="Century Gothic" size="25.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="113.0" layoutY="138.0" prefHeight="46.0" prefWidth="315.0">
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.5176470875740051" green="0.4588235318660736" blue="0.4588235318660736" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </TextField>
+                        <Label layoutX="193.0" layoutY="207.0" prefHeight="32.0" prefWidth="156.0" text="Contraseña">
+                           <font>
+                              <Font name="Century Gothic" size="25.0" />
+                           </font>
+                        </Label>
+                        <PasswordField layoutX="117.0" layoutY="252.0" prefHeight="45.0" prefWidth="315.0">
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.5176470875740051" green="0.4588235318660736" blue="0.4588235318660736" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </PasswordField>
+                        <Button fx:id="botonIniciarSesion" layoutX="191.0" layoutY="331.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesión">
+                           <font>
+                              <Font name="Century Gothic" size="22.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.5176470875740051" green="0.4588235318660736" blue="0.4588235318660736" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </Button>
+                     </children>
+                     <effect>
+                        <InnerShadow>
+                           <color>
+                              <Color red="0.2526315748691559" green="0.2348538041114807" blue="0.2348538041114807" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.CrearPatron">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutY="14.0" prefHeight="67.0" prefWidth="986.0">
+               <children>
+                  <Label layoutX="204.0" layoutY="19.0" text="Inserción de patrones de software">
+                     <font>
+                        <Font name="Century Gothic" size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutY="73.0" prefHeight="557.0" prefWidth="986.0">
+               <children>
+                  <Label layoutX="195.0" layoutY="86.0" text="Id del patrón:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="373.0" layoutY="78.0" prefHeight="47.0" prefWidth="181.0" />
+                  <Button fx:id="botonInsertar" layoutX="540.0" layoutY="506.0" mnemonicParsing="false" onAction="#insertarPatron" text="Insertar">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botonPaginaPrincipal" layoutX="222.0" layoutY="506.0" mnemonicParsing="false" onAction="#paginaPrincipal" text="Página principal">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="197.0" layoutY="145.0" text="Contexto:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="195.0" layoutY="204.0" text="Problema:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="373.0" layoutY="137.0" prefHeight="47.0" prefWidth="545.0" />
+                  <TextField layoutX="373.0" layoutY="196.0" prefHeight="47.0" prefWidth="546.0" />
+                  <Label layoutX="195.0" layoutY="261.0" text="Solución:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="373.0" layoutY="253.0" prefHeight="47.0" prefWidth="545.0" />
+                  <Label layoutX="194.0" layoutY="320.0" text="Insertar imagen:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="196.0" layoutY="379.0" text="Tipo de patrón:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="390.0" layoutY="371.0" prefHeight="47.0" prefWidth="181.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
