@@ -38,51 +38,51 @@ public class PatronesProtocol {
                 estado = ESTRUCTURAL_ONE;
                 break;
             case ESTRUCTURAL_ONE:
-                if (entrada.equalsIgnoreCase("Marin")){
+                if (entrada.equalsIgnoreCase("Patron Dos")){
                     salida = palabras[ESTRUCTURAL_ONE];
                     estado = COMPORTAMIENTO_ONE;
                 }else{
-                    salida = "Debe responder\"Marin\"Trate de nuevo. Tin";
+                    salida = "Debe responder\"Patron Dos\"Trate de nuevo. " + palabras[CREACIONAL_ONE];
                 }
                 break;
             case COMPORTAMIENTO_ONE:
-                if (entrada.equalsIgnoreCase("Pingue")) {
+                if (entrada.equalsIgnoreCase("Patron Tres")) {
                     salida = palabras[COMPORTAMIENTO_ONE];
                     estado = CREACIONAL_TWO;
                 }else{
-                    salida = "Debe responder\"Pingue\"Trate de nuevo. De do";
+                    salida = "Debe responder\"Patron Tres\"Trate de nuevo. " + palabras[ESTRUCTURAL_ONE];
                 }
                 break;
             case CREACIONAL_TWO:
-                if (entrada.equalsIgnoreCase("Macara")) {
+                if (entrada.equalsIgnoreCase("Patron Cuatro")) {
                     salida = palabras[CREACIONAL_TWO];
                     estado = ESTRUCTURAL_TWO;
                 }else{
-                    salida = "Debe responder\"Macara\"Trate de nuevo. Cucara";
+                    salida = "Debe responder\"Patron Cuatro\"Trate de nuevo. " + palabras[COMPORTAMIENTO_ONE];
                 }
                 break;
             case ESTRUCTURAL_TWO:
-                if (entrada.equalsIgnoreCase("Fue")){
+                if (entrada.equalsIgnoreCase("Patron Cinco")){
                     salida = palabras[ESTRUCTURAL_TWO];
                     estado = COMPORTAMIENTO_TWO;
                 }else{
-                    salida = "Debe responder\"Fue\"Trate de nuevo. Titere";
+                    salida = "Debe responder\"Patron Cinco\"Trate de nuevo. " + palabras[CREACIONAL_TWO];
                 }
                 break;
             case COMPORTAMIENTO_TWO:
-                if (entrada.equalsIgnoreCase("Fue Tete")) {
+                if (entrada.equalsIgnoreCase("Patron Seis")) {
                     salida = palabras[COMPORTAMIENTO_TWO];
                     estado = CREACIONAL_TREE;
                 }else{
-                    salida = "Debe responder\"Fue Tete\"Trate de nuevo. Yo no fui";
+                    salida = "Debe responder\"Patron Seis\"Trate de nuevo. " + palabras[ESTRUCTURAL_TWO];
                 }
                 break;
             case CREACIONAL_TREE:
-                if (entrada.equalsIgnoreCase("Pegale")){
+                if (entrada.equalsIgnoreCase("Patron Siete")){
                     salida = palabras[CREACIONAL_TREE] + "\n Desea seguir con el funcionamiento(s/n)";
                     estado = TERMINO;
                 }else{
-                    salida = "Debe responder\"Pegale\"Trate de nuevo. Pegale";
+                    salida = "Debe responder\"Patron Siete\"Trate de nuevo. " + palabras[COMPORTAMIENTO_TWO];
                 }
                 break;
         }
