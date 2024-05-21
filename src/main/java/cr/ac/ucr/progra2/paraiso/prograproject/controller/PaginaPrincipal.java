@@ -9,12 +9,17 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class BuscarPatron
-{
+public class PaginaPrincipal {
     @javafx.fxml.FXML
-    private Button botonPaginaPrincipal;
+    private Button botonBuscar;
+    @javafx.fxml.FXML
+    private Button botonCrear;
+    @javafx.fxml.FXML
+    private Button botonSalir;
     @FXML
     private BorderPane bp;
+    @FXML
+    private Button botonPrueba;
 
     private void loadPage(String page){
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(page));
@@ -25,13 +30,28 @@ public class BuscarPatron
         }
     }
 
-
     @javafx.fxml.FXML
     public void initialize() {
     }
 
     @javafx.fxml.FXML
-    public void paginaPrincipal(ActionEvent actionEvent) {
-        loadPage("paginaPrincipal.fxml");
+    public void buscar(ActionEvent actionEvent) {
+        loadPage("buscarPatron.fxml");
+    }
+
+    @javafx.fxml.FXML
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+
+    }
+
+    @javafx.fxml.FXML
+    public void crear(ActionEvent actionEvent) {
+        loadPage("crearPatron.fxml");
+    }
+
+    @FXML
+    public void pruebaUno(ActionEvent actionEvent) {
+        loadPage("pruebaProyecto.fxml");
     }
 }
