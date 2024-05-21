@@ -1,4 +1,4 @@
-package util;
+package cr.ac.ucr.progra2.paraiso.prograproject.util;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;

@@ -1,4 +1,6 @@
-package domain;
+package cr.ac.ucr.progra2.paraiso.prograproject.domain;
+
+import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
 
 import java.io.IOException;
 
@@ -14,23 +16,23 @@ public class DesignPattern {
         private String image;
 
         public DesignPattern( String context, String problem, String solution, String example, String classification, String imageSource) throws IOException {
-            this.id = util.Utility.getMaxID();
+            this.id = Utility.getMaxID();
             this.context = context;
             this.problem = problem;
             this.solution = solution;
             this.example = example;
             this.classification = classification;
-            this.image = util.Utility.encode(imageSource);
+            this.image = Utility.encode(imageSource);
         }
 
         public DesignPattern(String context, String problem, String solution, String classification, String imageSource) throws IOException {
-            this.id = util.Utility.getMaxID();
+            this.id = Utility.getMaxID();
             this.context = context;
             this.problem = problem;
             this.solution = solution;
             this.example = null;
             this.classification = classification;
-            this.image = util.Utility.encode(imageSource);
+            this.image = Utility.encode(imageSource);
         }
 
 
@@ -87,7 +89,7 @@ public class DesignPattern {
         }
 
         public void setImage(String imagePath) throws IOException {
-            this.image = util.Utility.encode(imagePath);
+            this.image = Utility.encode(imagePath);
         }
 
 

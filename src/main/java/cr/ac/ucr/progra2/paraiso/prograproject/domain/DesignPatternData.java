@@ -1,4 +1,4 @@
-package domain;
+package cr.ac.ucr.progra2.paraiso.prograproject.domain;
 
 import org.jdom2.Document;
 import org.jdom2.Element;

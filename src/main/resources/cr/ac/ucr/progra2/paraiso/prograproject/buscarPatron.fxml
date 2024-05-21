@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.BuscarPatron">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutY="14.0" prefHeight="67.0" prefWidth="986.0">
+               <children>
+                  <Label layoutX="236.0" layoutY="15.0" text="Búsqueda de patrones de software">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutY="73.0" prefHeight="557.0" prefWidth="986.0">
+               <children>
+                  <Label layoutX="195.0" layoutY="28.0" text="Ingrese el id del patrón:">
+                     <font>
+                        <Font name="Century Gothic" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="493.0" layoutY="25.0" prefHeight="39.0" prefWidth="174.0" />
+                  <Button layoutX="683.0" layoutY="25.0" mnemonicParsing="false" text="Buscar">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Button>
+                  <TextArea layoutX="48.0" layoutY="79.0" prefHeight="408.0" prefWidth="895.0" />
+                  <Button layoutX="257.0" layoutY="506.0" mnemonicParsing="false" text="Página principal">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="492.0" layoutY="506.0" mnemonicParsing="false" text="Modificar">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="656.0" layoutY="506.0" mnemonicParsing="false" text="Eliminar">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

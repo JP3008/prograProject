@@ -1,11 +1,11 @@
 package domain;
 
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPattern;
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPatternData;
 import org.jdom2.JDOMException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class DesignPatternDataTest {
 
