@@ -11,12 +11,11 @@ import java.net.UnknownHostException;
 public class Cliente {
     public String servidorCliente(String ingreso) throws UnknownHostException {
         if (ingreso != null) {
-            InetAddress inetAddress = InetAddress.getLocalHost();
             Socket echoSocket;
             PrintWriter writer;
             BufferedReader reader;
             try {
-                echoSocket = new Socket(inetAddress, 9999);
+                echoSocket = new Socket("10.235.15.64", 9999);
                 writer = new PrintWriter(echoSocket.getOutputStream(), true);
                 reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
                 writer.println(ingreso);

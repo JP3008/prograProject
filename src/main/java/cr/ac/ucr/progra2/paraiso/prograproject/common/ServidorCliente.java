@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class TinMarinServidor {
+public class ServidorCliente {
     public String ServidorTimeMarin(int i) {
         String salida = null;
         ServerSocket serverSocket = null;
@@ -23,7 +23,7 @@ public class TinMarinServidor {
                 clienteSocket = serverSocket.accept();
                 PrintWriter writer = new PrintWriter(clienteSocket.getOutputStream(), true);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-                TinMarinProtocol protocol = new TinMarinProtocol();
+                PatronesProtocol protocol = new PatronesProtocol();
                 if (i == 0) {
                     salida = protocol.procesarEntrada(null);
                 } else {
