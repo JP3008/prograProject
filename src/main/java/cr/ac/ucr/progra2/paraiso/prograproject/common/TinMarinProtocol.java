@@ -87,7 +87,7 @@ public class TinMarinProtocol {
             if (entrada.equalsIgnoreCase("s")) {
                 estado = TIN;
             } else {
-                salida = "chao!";
+                salida = "Chao!";
             }
         }
         if (estado == TERMINO)

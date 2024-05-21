@@ -9,32 +9,30 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Cliente {
-    public static void servidorCliente() throws UnknownHostException {
-        InetAddress inetAddress = InetAddress.getLocalHost();
-        Socket echoSocket;
-        PrintWriter writer;
-        BufferedReader reader;
-        try{
-            echoSocket = new Socket(inetAddress,9999);
-            writer = new PrintWriter(echoSocket.getOutputStream(),true);
-            reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-            String entrada = reader.readLine();
-            //Modificarm para que estos se direcciones al textArea de la interfaz
-            System.out.println("Servidor" + entrada);
-            String salida;
-            BufferedReader lectorTeclado = new BufferedReader(new InputStreamReader(System.in));
-            while((salida = lectorTeclado.readLine()) != null){
-                writer.println(salida);
-                entrada = reader.readLine();
-                //Modificar para que esto se muestre un el textArea de la pantalla
-                System.out.println("Servidor" + entrada);
-            }//End while
-            reader.close();
-            writer.close();
-            lectorTeclado.close();
-            echoSocket.close();
-        }catch (IOException e){
-            e.printStackTrace();
+    public String servidorCliente(String ingreso) throws UnknownHostException {
+        if (ingreso != null) {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            Socket echoSocket;
+            PrintWriter writer;
+            BufferedReader reader;
+            try {
+                echoSocket = new Socket(inetAddress, 9999);
+                writer = new PrintWriter(echoSocket.getOutputStream(), true);
+                reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+                writer.println(ingreso);
+                String entrada = reader.readLine();
+                if (entrada != null){
+                    reader.close();
+                    writer.close();
+                    echoSocket.close();
+                    return "Servidor: " + entrada;
+                }else{
+                    return "";
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return "";
     }
 }
