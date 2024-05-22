@@ -20,12 +20,14 @@ public class PruebaProyecto
     @javafx.fxml.FXML
     private TextField txf_ingresar;
     @javafx.fxml.FXML
-    private TextArea txa_respuestaServidor;
+    private static TextArea txa_respuestaServidor;
     @javafx.fxml.FXML
     private Button botonAceptar;
     @javafx.fxml.FXML
     private Button botonPaginaPrincipal;
     public static int counter = 0;
+    ServidorCliente ServidorCliente = new ServidorCliente();
+    Cliente cliente = new Cliente();
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -39,19 +41,14 @@ public class PruebaProyecto
             throw new RuntimeException(e);
         }
     }
-    public static void setCounter(){
-        counter = 0;
-    }
 
 //
     @javafx.fxml.FXML
     public void aceptar(ActionEvent actionEvent) {
-        Cliente cliente = new Cliente();
-        ServidorCliente ServidorCliente = new ServidorCliente();
         String ingreso = txf_ingresar.getText();
         try {
-            txa_respuestaServidor.appendText(cliente.servidorCliente(ingreso));
-            txa_respuestaServidor.appendText(ServidorCliente.ServidorTimeMarin(counter));
+            txa_respuestaServidor.appendText(ServidorCliente.iniciarServidor());
+            cliente.servidorCliente(ingreso);
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
