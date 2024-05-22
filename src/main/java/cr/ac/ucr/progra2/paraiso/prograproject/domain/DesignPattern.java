@@ -15,7 +15,11 @@ public class DesignPattern {
         private String classification;
         private String image;
 
-        public DesignPattern( String context, String problem, String solution, String example, String classification, String imageSource) throws IOException {
+        public DesignPattern(){
+
+        }
+
+        public DesignPattern(String context, String problem, String solution, String example, String classification, String imageSource) throws IOException {
             this.id = Utility.getMaxID();
             this.context = context;
             this.problem = problem;

@@ -17,6 +17,12 @@ class DesignPatternDataTest {
         DesignPatternData dt = new DesignPatternData("File.xml");
         dt.addDesign(dp);
 
+
+
+        // 30 10 5 3 15 12 20 50 40 80 70 90
+        // 3 5 10 12 15 20 30 40 50 70 80 90
+        // 3 5 12 20 15 10 40 70 90 80 50 30
+
     }
 
 }

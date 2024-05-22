@@ -1,10 +1,12 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.util;
 
+import javafx.scene.image.Image;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,5 +43,14 @@ public class Utility {
         return encodedString;
 
     }
+
+    public static Image decode(String base64String) throws IOException {
+        byte[] imageBytes = Base64.getDecoder().decode(base64String);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
+
+        return new Image(inputStream);
+    }
+
+
 
 }
