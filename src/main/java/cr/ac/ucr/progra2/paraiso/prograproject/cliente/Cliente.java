@@ -9,29 +9,33 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Cliente {
-    public String servidorCliente(String ingreso) throws UnknownHostException {
-        if (ingreso != null) {
-            Socket echoSocket;
-            PrintWriter writer;
-            BufferedReader reader;
-            try {
-                echoSocket = new Socket("10.235.15.64", 9999);
-                writer = new PrintWriter(echoSocket.getOutputStream(), true);
-                reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-                writer.println(ingreso);
-                String entrada = reader.readLine();
-                if (entrada != null){
-                    reader.close();
-                    writer.close();
-                    echoSocket.close();
-                    return "Servidor: " + entrada;
-                }else{
-                    return "";
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static void main(String[] args) throws UnknownHostException {
+
+        Socket echoSocket = null;
+        PrintWriter writer = null;
+        BufferedReader reader = null;
+
+
+        try {
+            echoSocket = new Socket("localhost",9999);
+            writer = new PrintWriter(echoSocket.getOutputStream(),true);
+            reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+            String entrada = reader.readLine();
+            System.out.println("Server: " + entrada);
+            String salida;
+            BufferedReader keyboardReader = new BufferedReader(new InputStreamReader(System.in));
+            while ((salida = keyboardReader.readLine()) != null){
+                writer.println(salida);
+                entrada = reader.readLine();
+                System.out.println("Server:" + entrada);
+            }//while
+            reader.close();
+            writer.close();
+            keyboardReader.close();
+            echoSocket.close();
+        }catch (IOException io){
+            io.printStackTrace();
         }
-        return "";
+
     }
 }

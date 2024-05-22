@@ -1,101 +1,40 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.common;
 
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPattern;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class PatronesProtocol {
-    private static final int CREACIONAL_ONE = 0;
+    private List<DesignPattern> patterns;
 
-    private static final int ESTRUCTURAL_ONE = 1;
-
-    private static final int COMPORTAMIENTO_ONE = 2;
-
-    private static final int CREACIONAL_TWO = 3;
-
-    private static final int ESTRUCTURAL_TWO = 4;
-
-    private static final int COMPORTAMIENTO_TWO = 5;
-
-    private static final int CREACIONAL_TREE = 6;
-
-    private static final int TERMINO = 6;
-
-    private static final int REINICIAR = 7;
-    private int estado;
-
-    private String[] palabras;
-    public PatronesProtocol(){
-        estado = CREACIONAL_ONE;
-        palabras = new String[]{"Patrón creacional: Abstract Factory",
-                "Patrón Estructural: Bridge","Patrón Comportamiento: Command",
-                "Patrón Creacional: Prototype","Patrón Estructural: Composite",
-                "Patrón Comportamiento: Iterator","Patrón Creacional: Singleton\nDesea seguir con la funcion (s/n)"};
+    public PatronesProtocol(List<DesignPattern> patterns) {
+        this.patterns = patterns;
     }
-    //Protocolo para que el servidor sepa que indicarle al usuario
-    public String procesarEntrada(String  entrada){
-        //Iniciar la salida
-        String salida = null;
-        switch (estado){
-            case CREACIONAL_ONE:
-                salida = palabras[CREACIONAL_ONE];
-                estado = ESTRUCTURAL_ONE;
-                break;
-            case ESTRUCTURAL_ONE:
-                if (entrada.equalsIgnoreCase("Patron Dos")){
-                    salida = palabras[ESTRUCTURAL_ONE];
-                    estado = COMPORTAMIENTO_ONE;
-                }else{
-                    salida = "Debe responder\"Patron Dos\"Trate de nuevo. " + palabras[CREACIONAL_ONE];
-                }
-                break;
-            case COMPORTAMIENTO_ONE:
-                if (entrada.equalsIgnoreCase("Patron Tres")) {
-                    salida = palabras[COMPORTAMIENTO_ONE];
-                    estado = CREACIONAL_TWO;
-                }else{
-                    salida = "Debe responder\"Patron Tres\"Trate de nuevo. " + palabras[ESTRUCTURAL_ONE];
-                }
-                break;
-            case CREACIONAL_TWO:
-                if (entrada.equalsIgnoreCase("Patron Cuatro")) {
-                    salida = palabras[CREACIONAL_TWO];
-                    estado = ESTRUCTURAL_TWO;
-                }else{
-                    salida = "Debe responder\"Patron Cuatro\"Trate de nuevo. " + palabras[COMPORTAMIENTO_ONE];
-                }
-                break;
-            case ESTRUCTURAL_TWO:
-                if (entrada.equalsIgnoreCase("Patron Cinco")){
-                    salida = palabras[ESTRUCTURAL_TWO];
-                    estado = COMPORTAMIENTO_TWO;
-                }else{
-                    salida = "Debe responder\"Patron Cinco\"Trate de nuevo. " + palabras[CREACIONAL_TWO];
-                }
-                break;
-            case COMPORTAMIENTO_TWO:
-                if (entrada.equalsIgnoreCase("Patron Seis")) {
-                    salida = palabras[COMPORTAMIENTO_TWO];
-                    estado = CREACIONAL_TREE;
-                }else{
-                    salida = "Debe responder\"Patron Seis\"Trate de nuevo. " + palabras[ESTRUCTURAL_TWO];
-                }
-                break;
-            case CREACIONAL_TREE:
-                if (entrada.equalsIgnoreCase("Patron Siete")){
-                    salida = palabras[CREACIONAL_TREE] + "\n Desea seguir con el funcionamiento(s/n)";
-                    estado = TERMINO;
-                }else{
-                    salida = "Debe responder\"Patron Siete\"Trate de nuevo. " + palabras[COMPORTAMIENTO_TWO];
-                }
-                break;
+
+    public PatronesProtocol() throws IOException {
+        patterns = new ArrayList<>();
+        patterns.add(new DesignPattern("Context One", "Problem One", "Solution One", "Example One", "Creational", "Image", 111));
+        patterns.add(new DesignPattern("Context Two", "Problem Two", "Solution Two", "Example Two", "Structural", "Image",222));
+        patterns.add(new DesignPattern("Context Three", "Problem Three", "Solution Three", "Example Three", "Behavioral", "Image",333));
+    }
+
+    public String procesarEntrada(String entrada) {
+        if (entrada == null || entrada.isEmpty()) {
+            return "Ingrese 'pattern one', 'pattern two' o 'pattern three' para recibir información sobre un patrón en particular.";
         }
-        if (estado == REINICIAR) {
-            if (entrada.equalsIgnoreCase("s")) {
-                estado = CREACIONAL_ONE;
-            } else {
-                salida = "Chao!";
-            }
+
+        switch (entrada.toLowerCase()) {
+            case "pattern one":
+                return patterns.get(0).toString();
+            case "pattern two":
+                return patterns.get(1).toString();
+            case "pattern three":
+                return patterns.get(2).toString();
+            default:
+                return "Opción no válida. Por favor, ingrese 'pattern one', 'pattern two' o 'pattern three'.";
         }
-        if (estado == TERMINO)
-            estado = REINICIAR;
-        //Retornar el mensaje del servidor
-        return salida;
-    }//End method()
-}//End class
+    }
+}
+

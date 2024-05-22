@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class Utility {
-
+/*
     public static int getMaxID(){
         int numDesigns=0;
         File file = new File("File.xml");
@@ -41,5 +41,5 @@ public class Utility {
         return encodedString;
 
     }
-
+*/
 }

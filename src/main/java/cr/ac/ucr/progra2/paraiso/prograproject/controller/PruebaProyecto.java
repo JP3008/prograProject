@@ -2,6 +2,7 @@ package cr.ac.ucr.progra2.paraiso.prograproject.controller;
 
 import cr.ac.ucr.progra2.paraiso.prograproject.HelloApplication;
 import cr.ac.ucr.progra2.paraiso.prograproject.cliente.Cliente;
+import cr.ac.ucr.progra2.paraiso.prograproject.common.PatronesProtocol;
 import cr.ac.ucr.progra2.paraiso.prograproject.common.ServidorCliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -25,11 +26,31 @@ public class PruebaProyecto
     private Button botonAceptar;
     @javafx.fxml.FXML
     private Button botonPaginaPrincipal;
-    public static int counter = 0;
+
+    PatronesProtocol pattern = new PatronesProtocol();
+
+    public PruebaProyecto() throws IOException {
+    }
 
     @javafx.fxml.FXML
     public void initialize() {
+
+        txa_respuestaServidor.setText("Active Server\n" + "Ingrese 'pattern one', 'pattern two' o 'pattern three' para recibir información sobre un patrón en particular.");
+        txa_respuestaServidor.appendText("Cliente: " + txf_ingresar.getText() + "\n");
+
     }
+
+    @javafx.fxml.FXML
+    public void aceptar(ActionEvent actionEvent) {
+
+        txa_respuestaServidor.appendText("Cliente: " + txf_ingresar.getText() + "\n");
+        txa_respuestaServidor.appendText("Server: " + pattern.procesarEntrada(txf_ingresar.getText()) + "\n");
+
+        txf_ingresar.clear();
+
+    }
+
+
 
     private void loadPage(String page){
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(page));
@@ -38,24 +59,6 @@ public class PruebaProyecto
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    public static void setCounter(){
-        counter = 0;
-    }
-
-//
-    @javafx.fxml.FXML
-    public void aceptar(ActionEvent actionEvent) {
-        Cliente cliente = new Cliente();
-        ServidorCliente ServidorCliente = new ServidorCliente();
-        String ingreso = txf_ingresar.getText();
-        try {
-            txa_respuestaServidor.appendText(cliente.servidorCliente(ingreso));
-            txa_respuestaServidor.appendText(ServidorCliente.ServidorTimeMarin(counter));
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-        counter++;
     }
 
     @javafx.fxml.FXML
