@@ -9,30 +9,28 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Cliente {
-    public String servidorCliente(String ingreso) throws UnknownHostException {
+    public void servidorCliente(String ingreso) throws UnknownHostException {
+        String salida = null;
+        InetAddress inetAddress;
         if (ingreso != null) {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            Socket echoSocket;
-            PrintWriter writer;
-            BufferedReader reader;
-            try {
-                echoSocket = new Socket(inetAddress, 9999);
-                writer = new PrintWriter(echoSocket.getOutputStream(), true);
-                reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+            try{
+            Socket echoSocket = new Socket("localhost", 5000);
+                 System.out.println("Entro");
+                 PrintWriter writer = new PrintWriter(echoSocket.getOutputStream(), true);
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
                 writer.println(ingreso);
                 String entrada = reader.readLine();
-                if (entrada != null){
-                    reader.close();
-                    writer.close();
-                    echoSocket.close();
-                    return "Servidor: " + entrada;
-                }else{
-                    return "";
-                }
+                    if (entrada != null) {
+                        salida = "Servidor: " + entrada;
+                    } else {
+                        salida = "No se recibió respuesta del servidor.";
+                    }
+                    entrada = reader.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
+                salida =  "Error de comunicación con el servidor.";
             }
         }
-        return "";
     }
 }
+

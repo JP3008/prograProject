@@ -2,7 +2,7 @@ package cr.ac.ucr.progra2.paraiso.prograproject.controller;
 
 import cr.ac.ucr.progra2.paraiso.prograproject.HelloApplication;
 import cr.ac.ucr.progra2.paraiso.prograproject.cliente.Cliente;
-import cr.ac.ucr.progra2.paraiso.prograproject.common.TinMarinServidor;
+import cr.ac.ucr.progra2.paraiso.prograproject.common.ServidorCliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -20,12 +20,14 @@ public class PruebaProyecto
     @javafx.fxml.FXML
     private TextField txf_ingresar;
     @javafx.fxml.FXML
-    private TextArea txa_respuestaServidor;
+    private static TextArea txa_respuestaServidor;
     @javafx.fxml.FXML
     private Button botonAceptar;
     @javafx.fxml.FXML
     private Button botonPaginaPrincipal;
     public static int counter = 0;
+    ServidorCliente ServidorCliente = new ServidorCliente();
+    Cliente cliente = new Cliente();
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -39,19 +41,14 @@ public class PruebaProyecto
             throw new RuntimeException(e);
         }
     }
-    public static void setCounter(){
-        counter = 0;
-    }
 
 //
     @javafx.fxml.FXML
     public void aceptar(ActionEvent actionEvent) {
-        Cliente cliente = new Cliente();
-        TinMarinServidor tinMarinServidor = new TinMarinServidor();
         String ingreso = txf_ingresar.getText();
         try {
-            txa_respuestaServidor.appendText(cliente.servidorCliente(ingreso));
-            txa_respuestaServidor.appendText(tinMarinServidor.ServidorTimeMarin(counter));
+            txa_respuestaServidor.appendText(ServidorCliente.iniciarServidor());
+            cliente.servidorCliente(ingreso);
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
