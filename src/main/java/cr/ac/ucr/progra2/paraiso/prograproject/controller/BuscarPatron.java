@@ -34,4 +34,7 @@ public class BuscarPatron
     public void paginaPrincipal(ActionEvent actionEvent) {
         loadPage("paginaPrincipal.fxml");
     }
+
+    @FXML
+    public void modificar(ActionEvent actionEvent) { loadPage("modificarPatron.fxml");}
 }

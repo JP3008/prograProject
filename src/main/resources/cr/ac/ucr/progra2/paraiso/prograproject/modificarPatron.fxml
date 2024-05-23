@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.CrearPatron">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.ModificarPatron">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Pane layoutY="14.0" prefHeight="67.0" prefWidth="986.0">
                <children>
-                  <Label layoutX="204.0" layoutY="19.0" text="Inserción de patrones de software">
+                  <Label layoutX="204.0" layoutY="19.0" text="Modificación del patrón de software">
                      <font>
                         <Font name="Century Gothic" size="35.0" />
                      </font>
@@ -24,7 +24,7 @@
                         <Font name="Century Gothic" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="buttonInsert" layoutX="594.0" layoutY="470.0" mnemonicParsing="false" onAction="#insertarPatron" text="Insertar">
+                  <Button fx:id="buttonInsert" layoutX="551.0" layoutY="470.0" mnemonicParsing="false" onAction="#insertarPatron" text="Guardar cambios">
                      <font>
                         <Font name="Century Gothic" size="25.0" />
                      </font>
