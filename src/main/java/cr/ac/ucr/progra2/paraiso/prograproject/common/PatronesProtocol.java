@@ -15,9 +15,9 @@ public class PatronesProtocol {
 
     public PatronesProtocol() throws IOException {
         patterns = new ArrayList<>();
-        patterns.add(new DesignPattern("Context One", "Problem One", "Solution One", "Example One", "Creational", "Image", 111));
-        patterns.add(new DesignPattern("Context Two", "Problem Two", "Solution Two", "Example Two", "Structural", "Image",222));
-        patterns.add(new DesignPattern("Context Three", "Problem Three", "Solution Three", "Example Three", "Behavioral", "Image",333));
+        patterns.add(new DesignPattern(111,"Context One", "Problem One", "Solution One", "Example One", "Creational", "Image"));
+        patterns.add(new DesignPattern(111,"Context Two", "Problem Two", "Solution Two", "Example Two", "Structural", "Image"));
+        patterns.add(new DesignPattern(111,"Context Three", "Problem Three", "Solution Three", "Example Three", "Behavioral", "Image"));
     }
 
     public String procesarEntrada(String entrada) {

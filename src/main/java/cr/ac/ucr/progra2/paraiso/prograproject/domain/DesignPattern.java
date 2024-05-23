@@ -15,14 +15,18 @@ public class DesignPattern {
         private String classification;
         private String image;
 
-        public DesignPattern(String context, String problem, String solution, String example, String classification, String image,int id) throws IOException {
-            this.id = id;
-            this.context = context;
-            this.problem = problem;
-            this.solution = solution;
-            this.example = example;
-            this.classification = classification;
-            this.image = image;
+
+    public DesignPattern(int id, String context, String problem, String solution, String example, String classification, String image) throws IOException {
+        this.id = id;
+        this.context = context;
+        this.problem = problem;
+        this.solution = solution;
+        this.example = example;
+        this.classification = classification;
+        this.image = Utility.encode(image);
+    }
+
+    public DesignPattern(){
         }
 
 
@@ -80,7 +84,7 @@ public class DesignPattern {
         }
 
         public void setImage(String imagePath) throws IOException {
-            this.image = image;
+            this.image = Utility.encode(imagePath);
         }
 
 

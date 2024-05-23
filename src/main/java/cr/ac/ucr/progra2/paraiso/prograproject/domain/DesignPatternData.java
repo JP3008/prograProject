@@ -1,5 +1,6 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.domain;
 
+import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -43,7 +44,7 @@ public class DesignPatternData {
         XMLOutputter xmlOutputter = new XMLOutputter();
         xmlOutputter.output(this.doc,new PrintWriter(this.routeDocument));
         System.out.println("Elemento guardado");
-        //xmlOutputter.output(this.doc,System.out);
+        xmlOutputter.output(this.doc,System.out);
 
     }
 
@@ -84,7 +85,7 @@ public class DesignPatternData {
     public void addDesign(DesignPattern DP){
 
         try {
-            DesignPatternData data = new DesignPatternData("file.xml");
+            DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualFile()));
             data.createDesign(DP);
         } catch (IOException e) {
             throw new RuntimeException(e);

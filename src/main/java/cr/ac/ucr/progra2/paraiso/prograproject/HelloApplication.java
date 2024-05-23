@@ -1,10 +1,12 @@
 package cr.ac.ucr.progra2.paraiso.prograproject;
 
+import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class
@@ -19,6 +21,7 @@ HelloApplication extends Application {
         stage.setScene(scene);
       //  stage.setResizable(false);
         stage.show();
+        File file = new File(String.valueOf(Utility.usualFile()));
 
     }
 

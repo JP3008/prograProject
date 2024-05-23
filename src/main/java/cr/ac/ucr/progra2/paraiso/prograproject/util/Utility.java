@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class Utility {
-/*
+
     public static int getMaxID(){
         int numDesigns=0;
         File file = new File("File.xml");
@@ -21,7 +21,7 @@ public class Utility {
 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
-                Document document = builder.parse(new File("File.xml"));
+                Document document = builder.parse(new File(String.valueOf(usualFile())));
 
 
                 NodeList designList = document.getElementsByTagName("Design");
@@ -32,7 +32,7 @@ public class Utility {
             }
         }
 
-        return numDesigns;
+        return numDesigns+1;
     }
 
     public static String encode(String path) throws IOException {
@@ -41,5 +41,10 @@ public class Utility {
         return encodedString;
 
     }
-*/
+
+    public static File usualFile(){
+        File xml = new File("patterns.xml");
+        return xml;
+    }
+
 }

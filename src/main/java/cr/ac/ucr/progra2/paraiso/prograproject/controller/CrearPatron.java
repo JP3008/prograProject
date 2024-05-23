@@ -80,6 +80,7 @@ public class CrearPatron
         dp.setClassification(String.valueOf(comboBoxPattern.getValue()));
 
         data.addDesign(dp);
+        labelID.setText(String.valueOf(Utility.getMaxID()));
     }
 
     @javafx.fxml.FXML
