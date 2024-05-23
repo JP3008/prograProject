@@ -8,37 +8,23 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServidorCliente {
-    public String iniciarServidor() {
-        String salida = null;
-        try{
-         ServerSocket serverSocket = new ServerSocket(5000);
-            System.out.println("Servidor iniciado y esperando conexiones...");
-            while (true) {
-                try (Socket clienteSocket = serverSocket.accept();
-                     PrintWriter writer = new PrintWriter(clienteSocket.getOutputStream(), true);
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()))) {
 
-                    PatronesProtocol protocol = new PatronesProtocol();
-                    String entrada = reader.readLine();
+    public static void main(String[] args) {
+        ServerSocket serverSocket = null;
+        boolean listening = true;
 
-                    if (entrada == null) {
-                        salida = protocol.procesarEntrada(null);
-                    } else {
-                        salida = protocol.procesarEntrada(entrada);
-                        if ("Chao!".equalsIgnoreCase(salida)) {
-                            // Reiniciar el contador si la prueba termina para volver a empezar
-                            salida = "Se termino la prueba";
-                        }
-                    }
-                    writer.println(salida);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        try {
+            serverSocket = new ServerSocket(9999);
+            System.out.println("Active server");
+            while (listening) {
+                MultipleServerThread hilo = new MultipleServerThread(serverSocket.accept());
+                hilo.start();
             }
+            serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
-        return salida;
+
     }
 }
-
