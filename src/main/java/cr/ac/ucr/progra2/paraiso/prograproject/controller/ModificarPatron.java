@@ -1,10 +1,10 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.controller;
 
 import cr.ac.ucr.progra2.paraiso.prograproject.HelloApplication;
-import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPattern;
-import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPatternType;
 import cr.ac.ucr.progra2.paraiso.prograproject.data.DesignPatternData;
 import cr.ac.ucr.progra2.paraiso.prograproject.data.DesignPatternTypeData;
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPattern;
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPatternType;
 import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,11 +21,7 @@ import org.jdom2.JDOMException;
 import java.io.File;
 import java.io.IOException;
 
-public class CrearPatron
-{
-    @javafx.fxml.FXML
-
-    private BorderPane bp;
+public class ModificarPatron {
     @javafx.fxml.FXML
     private TextField textFieldProblem;
     @javafx.fxml.FXML
@@ -35,31 +31,47 @@ public class CrearPatron
     @javafx.fxml.FXML
     private Button buttonSelectFile;
     @javafx.fxml.FXML
+    private TextField textFieldExample;
+    @javafx.fxml.FXML
+    private ImageView imageviewFile;
+    @javafx.fxml.FXML
     private Button buttonInsert;
+    @javafx.fxml.FXML
+    private BorderPane bp;
     @javafx.fxml.FXML
     private TextField textFieldSolution;
     @javafx.fxml.FXML
-    private Button buttonBack;
-    @javafx.fxml.FXML
     private TextField textFieldContext;
     @javafx.fxml.FXML
-    private TextField textFieldExample;
+    private Button buttonBack;
+
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
 
 
-    public File selectedFile;
+    private File selectedFile;
 
     @javafx.fxml.FXML
     private ImageView imageViewFile;
 
     @javafx.fxml.FXML
     public void initialize() throws IOException, JDOMException {
-        labelID.setText(String.valueOf(Utility.getMaxID(Utility.usualDataFile())));
+        Utility ut = new Utility();
+        DesignPattern design = Utility.getDesign(ut.returnID());
+        labelID.setText(String.valueOf(design.getDesignID()));
         selectedFile = null;
         DesignPatternTypeData data = new DesignPatternTypeData(String.valueOf(Utility.usualTypeFile()));
         ObservableList<DesignPatternType> options = FXCollections.observableArrayList(data.findAll());
         comboBoxPattern.setItems(options);
+
+        System.out.println(design);
+        textFieldContext.setText(design.getContext());
+        textFieldExample.setText(design.getExample());
+        textFieldProblem.setText(design.getProblem());
+        textFieldSolution.setText(design.getSolution());
+        //DesignPatternType type = Utility.getDesignType(design.getType());
+        //comboBoxPattern.setValue(type.getType());
+        //imageViewFile.setImage(Utility.decode(design.getImage()));
 
     }
 
@@ -86,25 +98,17 @@ public class CrearPatron
             dp.setProblem(textFieldProblem.getText());
             dp.setSolution(textFieldSolution.getText());
 
-                dp.setExample(textFieldExample.getText());
+            dp.setExample(textFieldExample.getText());
 
             dp.setImage(String.valueOf(selectedFile));
             dp.setType((DesignPatternType) comboBoxPattern.getValue());
 
-            data.addDesign(dp);
+            data.modifyDesign(Integer.parseInt(labelID.getText()),dp);
 
-            alert.setContentText("Design added!");
+            alert.setContentText("Design modified!");
             alert.showAndWait();
 
-            labelID.setText("");
-            textFieldContext.setText("");
-            textFieldProblem.setText("");
-            textFieldSolution.setText("");
-            textFieldExample.setText("");
-            selectedFile = null;
-            buttonSelectFile.setText("Seleccionar");
-            labelID.setText(String.valueOf(Utility.getMaxID(Utility.usualDataFile())));
-
+            paginaPrincipal(actionEvent);
         }else{
             alert.setContentText("Information missing!");
             alert.showAndWait();
@@ -115,7 +119,7 @@ public class CrearPatron
 
     @javafx.fxml.FXML
     public void paginaPrincipal(ActionEvent actionEvent) {
-        loadPage("paginaPrincipal.fxml");
+        loadPage("buscarPatron.fxml");
     }
 
     @javafx.fxml.FXML
@@ -142,4 +146,5 @@ public class CrearPatron
             imageViewFile.setImage(new Image(selectedFile.toString()));
         }
     }
+
 }

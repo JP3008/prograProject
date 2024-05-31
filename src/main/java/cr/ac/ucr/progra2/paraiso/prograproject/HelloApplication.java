@@ -21,7 +21,8 @@ HelloApplication extends Application {
         stage.setScene(scene);
       //  stage.setResizable(false);
         stage.show();
-        File file = new File(String.valueOf(Utility.usualFile()));
+        File filePattern = new File(String.valueOf(Utility.usualDataFile()));
+        File fileType = new File(String.valueOf(Utility.usualTypeFile()));
 
     }
 

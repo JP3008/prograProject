@@ -1,11 +1,15 @@
 package domain;
 
+import cr.ac.ucr.progra2.paraiso.prograproject.data.DesignPatternData;
+import cr.ac.ucr.progra2.paraiso.prograproject.data.DesignPatternTypeData;
 import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPattern;
-import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPatternData;
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPatternType;
+import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
 import org.jdom2.JDOMException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 class DesignPatternDataTest {
 
@@ -13,16 +17,22 @@ class DesignPatternDataTest {
     public void Test() throws IOException, JDOMException {
 
 
-        DesignPattern dp = new DesignPattern(2,"Context2","Problem2","Solution2","Example","class","C:\\Users\\d4ni3\\OneDrive\\Escritorio\\F-RE2c4a4AAA4z8.jpg");
-        DesignPatternData dt = new DesignPatternData("File.xml");
-        dt.addDesign(dp);
+        DesignPatternData dt = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
+        DesignPattern designPattern = new DesignPattern();
 
+        System.out.println(dt.deleteDesign(1));
 
+        //List<DesignPattern> list =  dt.getAll();
+        //for (int i = 0; i<list.size(); i++) {
+          //  System.out.println(list.get(i));
+        //}
+/*
+        DesignPatternTypeData data = new DesignPatternTypeData(String.valueOf(Utility.usualTypeFile()));
+        DesignPatternType dpt = data.xmlToObject(2);
 
-        // 30 10 5 3 15 12 20 50 40 80 70 90
-        // 3 5 10 12 15 20 30 40 50 70 80 90
-        // 3 5 12 20 15 10 40 70 90 80 50 30
-
+        System.out.println(dpt);
+        System.out.println(dpt.getID());
+*/
     }
-
 }
+
