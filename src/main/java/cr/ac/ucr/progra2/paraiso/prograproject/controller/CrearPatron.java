@@ -102,6 +102,7 @@ public class CrearPatron
             textFieldSolution.setText("");
             textFieldExample.setText("");
             selectedFile = null;
+            imageViewFile.setImage(null);
             buttonSelectFile.setText("Seleccionar");
             labelID.setText(String.valueOf(Utility.getMaxID(Utility.usualDataFile())));
 
