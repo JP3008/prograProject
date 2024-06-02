@@ -54,8 +54,8 @@ public class DesignPatternTypeData {
 
         XMLOutputter xmlOutputter = new XMLOutputter();
         xmlOutputter.output(this.doc,new PrintWriter(this.routeDocument));
-        System.out.println("Elemento guardado");
-        xmlOutputter.output(this.doc,System.out);
+        //System.out.println("Elemento guardado");
+        //xmlOutputter.output(this.doc,System.out);
 
     }
 
@@ -123,6 +123,43 @@ public class DesignPatternTypeData {
             return design;
         }else{
             return null;
+        }
+
+    }
+
+    public void deleteDesignType(int code) throws IOException {
+
+        boolean deleted = false;
+        List<Element> list = root.getChildren("Design");
+        for (Element design : list) {
+            String current =design.getAttributeValue("ID");
+            if (current.equals(String.valueOf(code))) {
+                root.removeContent(design);
+                deleted=true;
+                save();
+                break;
+            }
+        }
+
+    }
+
+    public void modifyType(int code, DesignPatternType newType) throws IOException {
+
+        Element save = null;
+        List<Element> list = root.getChildren("Design");
+        for (Element design : list) {
+            String current = design.getAttributeValue("ID");
+            if (current.equals(String.valueOf(code))) {
+                save = design;
+                break;
+            }
+        }
+
+        if (save!=null){
+            save.getAttribute("ID").setValue(String.valueOf(newType.getID()));
+            save.getChild("typeID").setText(newType.getType());
+            save();
+
         }
 
     }

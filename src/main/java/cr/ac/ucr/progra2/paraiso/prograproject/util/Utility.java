@@ -23,16 +23,6 @@ import java.util.List;
 
 public class Utility {
 
-    private int saveID;
-
-    public int returnID() {
-        return saveID;
-    }
-
-    public void saveID(int ID) {
-        this.saveID = ID;
-    }
-
     public static int getMaxID(File givenFile){
         int maxID=0;
         File file = new File(String.valueOf(givenFile));

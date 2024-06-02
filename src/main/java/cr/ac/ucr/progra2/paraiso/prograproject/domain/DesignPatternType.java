@@ -12,6 +12,11 @@ public class DesignPatternType {
         this.type = type;
     }
 
+    public DesignPatternType(int id, String type){
+        this.ID = id;
+        this.type = type;
+    }
+
     public DesignPatternType(int id) {
         this.ID = id;
     }
@@ -27,6 +32,7 @@ public class DesignPatternType {
     public void setID() {
         this.ID = Utility.getMaxID(Utility.usualTypeFile());
     }
+
 
     public void setID(int ID) {
         this.ID = ID;

@@ -76,7 +76,7 @@ public class BuscarPatron
 
     ObservableList<Integer> options;
 
-    @javafx.fxml.FXML
+    @FXML
     public void initialize() throws IOException, JDOMException {
         DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
         this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
@@ -91,7 +91,7 @@ public class BuscarPatron
 
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void paginaPrincipal(ActionEvent actionEvent) {
 
 
@@ -215,32 +215,37 @@ public class BuscarPatron
 
                     }
 
+                    if (comboBoxType.getValue()==null) {
+                        dp.setType((DesignPatternType) comboBoxType.getValue());
+                        data.modifyDesign((Integer) comboBoxIDList.getValue(), dp);
 
-                    dp.setType((DesignPatternType) comboBoxType.getValue());
+                        alert.setContentText("Design changed!");
+                        alert.showAndWait();
+                        //Copiar esto
+                        modifying = false;
 
-                    data.modifyDesign((Integer) comboBoxIDList.getValue(), dp);
+                        comboBoxIDList.setDisable(false);
+                        problemLabel.setEditable(false);
+                        contextLabel.setEditable(false);
+                        solutionLabel.setEditable(false);
+                        exampleLabel.setEditable(false);
+                        typeLabel.setVisible(true);
+                        comboBoxType.setVisible(false);
+                        selectButton.setVisible(false);
+                        searchButton.setDisable(false);
 
-                    alert.setContentText("Design changed!");
-                    alert.showAndWait();
-                    //Copiar esto
-                    modifying = false;
+                        modifyButton.setText("Modificar");
+                        buttonBack.setText("Página principal");
 
-                    comboBoxIDList.setDisable(false);
-                    problemLabel.setEditable(false);
-                    contextLabel.setEditable(false);
-                    solutionLabel.setEditable(false);
-                    exampleLabel.setEditable(false);
-                    typeLabel.setVisible(true);
-                    comboBoxType.setVisible(false);
-                    selectButton.setVisible(false);
-                    searchButton.setDisable(false);
+                        searchOnAction(actionEvent);
+                        comboBoxType.setValue(typeLabel.getText());
+                        fileExploring=false;
+                    }else {
+                        alert.setContentText("Information missing!");
+                        alert.showAndWait();
+                    }
 
-                    modifyButton.setText("Modificar");
-                    buttonBack.setText("Página principal");
 
-                    searchOnAction(actionEvent);
-                    comboBoxType.setValue(typeLabel.getText());
-                    fileExploring=false;
                 } else {
                     alert.setContentText("Information missing!");
                     alert.showAndWait();
@@ -258,7 +263,9 @@ public class BuscarPatron
         Optional<ButtonType> result = deleting.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-        data.deleteDesign((Integer) comboBoxIDList.getValue());
+
+            data.deleteDesign((Integer) comboBoxIDList.getValue());
+
         comboBoxIDList.setValue(null);
         designImageView.setImage(null);
         problemLabel.setText("");
@@ -282,7 +289,8 @@ public class BuscarPatron
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("PNG Files", "*.png"),
-                    new FileChooser.ExtensionFilter("JPG Files", "*.jpg")
+                    new FileChooser.ExtensionFilter("JPG Files", "*.jpg"),
+                    new FileChooser.ExtensionFilter("WEBP Files", "*.webp")
             );
 
             fileChooser.setTitle("Select Image File");

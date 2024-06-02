@@ -30,17 +30,17 @@
             <Pane layoutY="81.0" prefHeight="592.0" prefWidth="986.0">
                <children>
                   <GridPane layoutX="14.0" layoutY="36.0" prefHeight="330.0" prefWidth="553.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.20001220703125" minWidth="10.0" prefWidth="185.39999694824218" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="781.6000213623047" minWidth="10.0" prefWidth="397.4000030517578" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.20001220703125" minWidth="10.0" prefWidth="185.39999694824218" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="781.6000213623047" minWidth="10.0" prefWidth="397.4000030517578" />
+                     </columnConstraints>
+                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <Label text="Id del patrón:">
                            <font>
@@ -78,17 +78,17 @@
                         <TextField id="textFieldExample" fx:id="textFieldExample" prefHeight="47.0" prefWidth="545.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
-                  <GridPane layoutX="14.0" layoutY="366.0" prefHeight="139.0" prefWidth="482.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.19996337890626" minWidth="10.0" prefWidth="353.59998779296876" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.199951171875" minWidth="10.0" prefWidth="127.00001220703126" />
+                  <GridPane layoutX="14.0" layoutY="380.0" prefHeight="110.0" prefWidth="482.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.19996337890626" minWidth="10.0" prefWidth="353.59998779296876" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.199951171875" minWidth="10.0" prefWidth="127.00001220703126" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.2000732421875" minWidth="10.0" prefWidth="45.800048828125" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.39996337890625" minWidth="10.0" prefWidth="324.199951171875" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="64.60004272460938" minHeight="10.0" prefHeight="47.80005493164063" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="90.99994506835938" minHeight="10.0" prefHeight="90.99994506835938" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <Button fx:id="buttonSelectFile" mnemonicParsing="false" onAction="#selectPattern" text="Seleccionar" GridPane.rowIndex="1">
                            <font>
@@ -108,9 +108,14 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <HBox layoutX="567.0" layoutY="518.0" prefHeight="60.0" prefWidth="412.0" spacing="25.0">
+                  <HBox layoutX="381.0" layoutY="525.0" prefHeight="60.0" prefWidth="599.0" spacing="25.0">
                      <children>
-                        <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#paginaPrincipal" prefHeight="48.0" prefWidth="258.0" text="Página principal">
+                        <Button fx:id="buttonType" mnemonicParsing="false" onAction="#newType" text="Nuevo tipo">
+                           <font>
+                              <Font name="Century Gothic" size="25.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#paginaPrincipal" prefHeight="48.0" prefWidth="250.0" text="Página principal">
                            <font>
                               <Font name="Century Gothic" size="25.0" />
                            </font>

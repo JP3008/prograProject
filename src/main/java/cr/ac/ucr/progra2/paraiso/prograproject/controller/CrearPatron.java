@@ -52,6 +52,8 @@ public class CrearPatron
 
     @javafx.fxml.FXML
     private ImageView imageViewFile;
+    @javafx.fxml.FXML
+    private Button buttonType;
 
     @javafx.fxml.FXML
     public void initialize() throws IOException, JDOMException {
@@ -91,9 +93,11 @@ public class CrearPatron
             dp.setImage(String.valueOf(selectedFile));
             dp.setType((DesignPatternType) comboBoxPattern.getValue());
 
+
+            //En vez de hacer esto, mandar una llamada al servidor para que haga esto
             data.addDesign(dp);
 
-            alert.setContentText("Design added!");
+            alert.setContentText("Diseño añadido!");
             alert.showAndWait();
 
             labelID.setText("");
@@ -107,7 +111,7 @@ public class CrearPatron
             labelID.setText(String.valueOf(Utility.getMaxID(Utility.usualDataFile())));
 
         }else{
-            alert.setContentText("Information missing!");
+            alert.setContentText("Falta Información");
             alert.showAndWait();
 
         }
@@ -124,7 +128,8 @@ public class CrearPatron
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG Files", "*.png"),
-                new FileChooser.ExtensionFilter("JPG Files", "*.jpg")
+                new FileChooser.ExtensionFilter("JPG Files", "*.jpg"),
+                new FileChooser.ExtensionFilter("WEBP Files", "*.webp")
         );
 
         fileChooser.setTitle("Select Image File");
@@ -142,5 +147,9 @@ public class CrearPatron
             buttonSelectFile.setText("Cargado!");
             imageViewFile.setImage(new Image(selectedFile.toString()));
         }
+    }
+
+    @javafx.fxml.FXML
+    public void newType(ActionEvent actionEvent) {loadPage("crearTipo.fxml");
     }
 }

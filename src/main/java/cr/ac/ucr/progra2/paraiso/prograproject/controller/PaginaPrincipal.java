@@ -10,11 +10,11 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
 public class PaginaPrincipal {
-    @javafx.fxml.FXML
+    @FXML
     private Button botonBuscar;
-    @javafx.fxml.FXML
+    @FXML
     private Button botonCrear;
-    @javafx.fxml.FXML
+    @FXML
     private Button botonSalir;
     @FXML
     private BorderPane bp;
@@ -30,22 +30,22 @@ public class PaginaPrincipal {
         }
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void initialize() {
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void buscar(ActionEvent actionEvent) {
         loadPage("buscarPatron.fxml");
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void exit(ActionEvent actionEvent) {
         System.exit(0);
 
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void crear(ActionEvent actionEvent) {
         loadPage("crearPatron.fxml");
     }
