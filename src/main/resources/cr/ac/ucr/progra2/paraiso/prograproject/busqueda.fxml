@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,22 +16,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.BuscarPatron">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1283.0" style="-fx-background-color: #e0d4c3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.BuscarPatron">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutY="14.0" prefHeight="67.0" prefWidth="986.0">
+            <Pane layoutY="2.0" prefHeight="784.0" prefWidth="1283.0">
                <children>
-                  <Label layoutX="222.0" layoutY="14.0" text="Busqueda de patrones de software">
-                     <font>
-                        <Font name="Century Gothic" size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutY="81.0" prefHeight="592.0" prefWidth="986.0">
-               <children>
-                  <GridPane layoutX="14.0" layoutY="14.0" prefHeight="423.0" prefWidth="553.0">
+                  <GridPane layoutX="135.0" layoutY="170.0" prefHeight="423.0" prefWidth="553.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.20001220703125" minWidth="10.0" prefWidth="196.20000610351562" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="781.6000213623047" minWidth="10.0" prefWidth="356.9999938964844" />
@@ -51,31 +44,43 @@
                         </Label>
                         <Label text="Contexto:" GridPane.rowIndex="2">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
                         <Label text="Problema:" GridPane.rowIndex="3">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
                         <Label text="Solución:" GridPane.rowIndex="5">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="contextLabel" editable="false" prefHeight="47.0" prefWidth="462.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="problemLabel" editable="false" prefHeight="47.0" prefWidth="546.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="exampleLabel" editable="false" prefHeight="47.0" prefWidth="545.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="contextLabel" editable="false" prefHeight="47.0" prefWidth="462.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect></TextField>
+                        <TextField fx:id="problemLabel" editable="false" prefHeight="47.0" prefWidth="546.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect></TextField>
+                        <TextField fx:id="exampleLabel" editable="false" prefHeight="47.0" prefWidth="545.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect></TextField>
                         <Label text="Example" GridPane.rowIndex="4">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
-                        <TextField id="textFieldExample" fx:id="solutionLabel" editable="false" prefHeight="47.0" prefWidth="545.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField id="textFieldExample" fx:id="solutionLabel" editable="false" prefHeight="47.0" prefWidth="545.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect></TextField>
                         <Label text="Tipo de patrón:" GridPane.rowIndex="6">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
                         <ComboBox fx:id="comboBoxType" prefHeight="42.0" prefWidth="178.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -86,38 +91,53 @@
                         </Label>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <ComboBox fx:id="comboBoxIDList" onAction="#SearchingOnAction" prefHeight="46.0" prefWidth="106.0" />
-                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchOnAction" prefHeight="48.0" prefWidth="114.0" text="Buscar">
+                              <ComboBox fx:id="comboBoxIDList" onAction="#SearchingOnAction" prefHeight="46.0" prefWidth="106.0">
+                                 <effect>
+                                    <InnerShadow color="#301f00" />
+                                 </effect></ComboBox>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchOnAction" prefHeight="50.0" prefWidth="120.0" text="Buscar">
                                  <font>
-                                    <Font name="Century Gothic" size="25.0" />
+                                    <Font name="Century Gothic Bold" size="25.0" />
                                  </font>
+                                 <effect>
+                                    <InnerShadow color="#301f00" />
+                                 </effect>
                               </Button>
                            </children>
                         </HBox>
                         <Label text="Id del patrón:" GridPane.rowIndex="1">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
                         <Label text="Filtrar:">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
                         <HBox prefHeight="61.0" prefWidth="298.0" GridPane.columnIndex="1">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="349.0" spacing="5.0">
                                  <children>
-                                    <ComboBox fx:id="cbFilter" onAction="#filteringOnAction" prefHeight="46.0" prefWidth="105.0" />
+                                    <ComboBox fx:id="cbFilter" onAction="#filteringOnAction" prefHeight="46.0" prefWidth="105.0">
+                                       <effect>
+                                          <InnerShadow color="#301f00" />
+                                       </effect></ComboBox>
                                     <Button fx:id="filterButton" mnemonicParsing="false" onAction="#filterButton" prefHeight="48.0" prefWidth="112.0" text="Filtrar">
                                        <font>
-                                          <Font name="Century Gothic" size="25.0" />
+                                          <Font name="Century Gothic Bold" size="25.0" />
                                        </font>
+                                       <effect>
+                                          <InnerShadow color="#301f00" />
+                                       </effect>
                                     </Button>
                                     <Button fx:id="removeFilterButton" mnemonicParsing="false" onAction="#removeFilterOnAction" prefHeight="48.0" prefWidth="112.0" text="Borrar">
                                        <font>
-                                          <Font name="Century Gothic" size="25.0" />
+                                          <Font name="Century Gothic Bold" size="25.0" />
                                        </font>
+                                       <effect>
+                                          <InnerShadow color="#301f00" />
+                                       </effect>
                                     </Button>
                                  </children>
                               </HBox>
@@ -125,32 +145,57 @@
                         </HBox>
                      </children>
                   </GridPane>
-                  <HBox layoutX="14.0" layoutY="518.0" prefHeight="60.0" prefWidth="599.0" spacing="25.0">
+                  <HBox layoutX="351.0" layoutY="628.0" prefHeight="60.0" prefWidth="599.0" spacing="25.0">
                      <children>
                         <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#paginaPrincipal" prefHeight="48.0" prefWidth="250.0" text="Página principal">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect>
                         </Button>
                         <Button fx:id="modifyButton" disable="true" mnemonicParsing="false" onAction="#modifyOnAction" text="Modificar">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect>
                         </Button>
                         <Button fx:id="buttonDelete" disable="true" mnemonicParsing="false" onAction="#deleteOnAction" text="Eliminar">
                            <font>
-                              <Font name="Century Gothic" size="25.0" />
+                              <Font name="Century Gothic Bold" size="25.0" />
                            </font>
+                           <effect>
+                              <InnerShadow color="#301f00" />
+                           </effect>
                         </Button>
                      </children>
                   </HBox>
-                  <ImageView fx:id="designImageView" fitHeight="368.0" fitWidth="391.0" layoutX="589.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="designImageView" fitHeight="368.0" fitWidth="391.0" layoutX="747.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" />
                   <HBox layoutX="495.0" layoutY="247.0" prefHeight="100.0" prefWidth="200.0" />
                   <Button fx:id="selectButton" layoutX="696.0" layoutY="454.0" mnemonicParsing="false" onAction="#selectOnAction" text="Seleccionar" visible="false">
                      <font>
                         <Font name="Century Gothic" size="25.0" />
                      </font>
                   </Button>
+                  <Label layoutX="132.0" layoutY="81.0" text="Búsqueda de patrones de software">
+                     <font>
+                        <Font name="Century Gothic Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="1036.0" layoutY="90.0" />
+                  <Label layoutX="956.0" layoutY="84.0" text="TechDesigns">
+                     <font>
+                        <Font name="Bodoni MT Black" size="27.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="55.0" fitWidth="52.0" layoutX="1134.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>

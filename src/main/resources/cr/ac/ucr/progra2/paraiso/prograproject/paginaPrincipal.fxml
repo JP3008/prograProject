@@ -1,35 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="1159.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.PaginaPrincipal">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.PaginaPrincipal">
    <center>
-      <AnchorPane prefHeight="652.0" prefWidth="1173.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="652.0" prefWidth="1173.0" style="-fx-background-color: #e0d4c3;" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutY="128.0" prefHeight="544.0" prefWidth="1159.0">
+            <Pane layoutX="32.0" layoutY="14.0" prefHeight="687.0" prefWidth="1166.0" style="-fx-background-color: #e0d4c3;">
                <children>
-                  <Button fx:id="botonSalir" layoutX="536.0" layoutY="471.0" mnemonicParsing="false" onAction="#exit" text="Exit">
+                  <Button fx:id="botonSalir" layoutX="542.0" layoutY="551.0" mnemonicParsing="false" onAction="#exit" text="Exit">
                      <font>
-                        <Font name="Century Gothic" size="30.0" />
+                        <Font name="Century Gothic Bold" size="30.0" />
                      </font>
+                     <effect>
+                        <InnerShadow color="#301f00" />
+                     </effect>
                   </Button>
-                  <Button fx:id="botonCrear" layoutX="471.0" layoutY="232.0" mnemonicParsing="false" onAction="#crear" text="Crear patrón">
+                  <Button fx:id="botonCrear" layoutX="471.0" layoutY="324.0" mnemonicParsing="false" onAction="#crear" text="Crear patrón">
                      <font>
-                        <Font name="Century Gothic" size="30.0" />
+                        <Font name="Century Gothic Bold" size="30.0" />
                      </font>
+                     <effect>
+                        <InnerShadow color="#301f00" />
+                     </effect>
                   </Button>
-                  <Button fx:id="botonBuscar1" layoutX="375.0" layoutY="309.0" mnemonicParsing="false" onAction="#busqueda" text=" Busqueda y modificación">
+                  <Button fx:id="botonBuscar1" layoutX="375.0" layoutY="437.0" mnemonicParsing="false" onAction="#busqueda" text=" Búsqueda y modificación">
                      <font>
-                        <Font name="Century Gothic" size="30.0" />
+                        <Font name="Century Gothic Bold" size="30.0" />
                      </font>
+                     <effect>
+                        <InnerShadow color="#301f00" />
+                     </effect>
                   </Button>
+                  <Label layoutX="365.0" layoutY="149.0" lineSpacing="2.0" prefHeight="82.0" prefWidth="355.0" text="TechDesigns" textFill="#010b17">
+                     <font>
+                        <Font name="Bodoni MT Black" size="55.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Label>
+                  <ImageView fitHeight="115.0" fitWidth="95.0" layoutX="720.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="77.0" fitWidth="93.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@ordenar.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="72.0" fitWidth="77.0" layoutX="1064.0" layoutY="591.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@ordenar.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="365.0" layoutY="224.0" prefHeight="28.0" prefWidth="412.0" text="Aqui va el lema">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
-            <Pane layoutX="-1.0" layoutY="1.0" prefHeight="144.0" prefWidth="1031.0" />
          </children>
       </AnchorPane>
    </center>
