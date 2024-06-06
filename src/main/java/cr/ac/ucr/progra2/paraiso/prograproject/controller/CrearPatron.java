@@ -18,18 +18,16 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.jdom2.JDOMException;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 
-public class CrearPatron
-{
+public class CrearPatron {
     @javafx.fxml.FXML
-
     private BorderPane bp;
     @javafx.fxml.FXML
     private TextField textFieldProblem;
     @javafx.fxml.FXML
-    private ComboBox comboBoxPattern;
+    private ComboBox<DesignPatternType> comboBoxPattern;
     @javafx.fxml.FXML
     private Label labelID;
     @javafx.fxml.FXML
@@ -46,8 +44,6 @@ public class CrearPatron
     private TextField textFieldExample;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-
-
     public File selectedFile;
 
     @javafx.fxml.FXML
@@ -62,11 +58,9 @@ public class CrearPatron
         DesignPatternTypeData data = new DesignPatternTypeData(String.valueOf(Utility.usualTypeFile()));
         ObservableList<DesignPatternType> options = FXCollections.observableArrayList(data.findAll());
         comboBoxPattern.setItems(options);
-
     }
 
-
-    private void loadPage(String page){
+    private void loadPage(String page) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(page));
         try {
             this.bp.setCenter(fxmlLoader.load());
@@ -78,28 +72,30 @@ public class CrearPatron
     @javafx.fxml.FXML
     public void insertarPatron(ActionEvent actionEvent) throws IOException, JDOMException {
         DesignPattern dp = new DesignPattern();
-        DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
 
-
-        if (!textFieldExample.getText().isEmpty() && !labelID.getText().isEmpty() && !textFieldContext.getText().isEmpty() && !textFieldProblem.getText().isEmpty() && !textFieldSolution.getText().isEmpty() && comboBoxPattern.getValue() != null && selectedFile!=null) {
+        if (!textFieldExample.getText().isEmpty() && !labelID.getText().isEmpty() && !textFieldContext.getText().isEmpty() && !textFieldProblem.getText().isEmpty() && !textFieldSolution.getText().isEmpty() && comboBoxPattern.getValue() != null && selectedFile != null) {
 
             dp.setDesignID(Integer.parseInt(labelID.getText()));
             dp.setContext(textFieldContext.getText());
             dp.setProblem(textFieldProblem.getText());
             dp.setSolution(textFieldSolution.getText());
-
-                dp.setExample(textFieldExample.getText());
-
+            dp.setExample(textFieldExample.getText());
             dp.setImage(String.valueOf(selectedFile));
             dp.setType((DesignPatternType) comboBoxPattern.getValue());
 
+            // Enviar el objeto DesignPattern al servidor
+            try (Socket socket = new Socket("10.59.19.178", 12345);
+                 ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())) {
+                oos.writeObject(dp);
+                alert.setContentText("Diseño añadido!");
+                alert.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+                alert.setContentText("Error al conectar con el servidor.");
+                alert.showAndWait();
+            }
 
-            //En vez de hacer esto, mandar una llamada al servidor para que haga esto
-            data.addDesign(dp);
-
-            alert.setContentText("Diseño añadido!");
-            alert.showAndWait();
-
+            // Limpiar los campos después de la inserción
             labelID.setText("");
             textFieldContext.setText("");
             textFieldProblem.setText("");
@@ -110,12 +106,10 @@ public class CrearPatron
             buttonSelectFile.setText("Seleccionar");
             labelID.setText(String.valueOf(Utility.getMaxID(Utility.usualDataFile())));
 
-        }else{
+        } else {
             alert.setContentText("Falta Información");
             alert.showAndWait();
-
         }
-
     }
 
     @javafx.fxml.FXML
@@ -135,21 +129,19 @@ public class CrearPatron
         fileChooser.setTitle("Select Image File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
-        // Get the current stage from any component
         Stage stage = (Stage) bp.getScene().getWindow();
         selectedFile = fileChooser.showOpenDialog(stage);
 
-
-
         if (selectedFile == null) {
-            selectedFile=null;
-        }else{
+            selectedFile = null;
+        } else {
             buttonSelectFile.setText("Cargado!");
-            imageViewFile.setImage(new Image(selectedFile.toString()));
+            imageViewFile.setImage(new Image(selectedFile.toURI().toString()));
         }
     }
 
     @javafx.fxml.FXML
-    public void newType(ActionEvent actionEvent) {loadPage("crearTipo.fxml");
+    public void newType(ActionEvent actionEvent) {
+        loadPage("crearTipo.fxml");
     }
 }

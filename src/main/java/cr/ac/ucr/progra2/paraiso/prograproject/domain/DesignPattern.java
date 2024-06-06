@@ -1,13 +1,22 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.domain;
 
 import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
+import org.jdom2.JDOMException;
 
 import java.io.IOException;
 
 
-public class DesignPattern {
+import java.io.IOException;
+import java.io.Serializable;
 
-    //Attributes
+import java.io.IOException;
+import java.io.Serializable;
+
+public class DesignPattern implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    // Attributes
+    private String typeAsString;
     private int designID;
     private int type;
     private String context;
@@ -16,7 +25,7 @@ public class DesignPattern {
     private String example;
     private String image;
 
-    //Different kind of constructors
+    // Constructors
     public DesignPattern(DesignPatternType type, String context, String problem, String solution, String example, String image) throws IOException {
         this.designID = Utility.getMaxID(Utility.usualDataFile());
         this.type = type.getID();
@@ -28,8 +37,10 @@ public class DesignPattern {
     }
 
     public DesignPattern() {
+        // Default constructor
     }
 
+    // Getters and Setters
     public int getDesignID() {
         return designID;
     }
@@ -37,8 +48,6 @@ public class DesignPattern {
     public void setDesignID(int designID) {
         this.designID = designID;
     }
-
-//Getter and setter
 
     public String getContext() {
         return context;
@@ -80,24 +89,28 @@ public class DesignPattern {
         this.image = Utility.encode(imagePath);
     }
 
-    public void setImageAs64(String encodedImage){
+    public void setImageAs64(String encodedImage) {
         this.image = encodedImage;
-    }
-
-    public void setTypeAsNumber(int type){
-        this.type = type;
-    }
-
-    public void setType(DesignPatternType type) {
-        this.type = type.getID();
     }
 
     public int getType() {
         return this.type;
     }
 
-//To string
+    public void setTypeAsNumber(int type) {
+        this.type = type;
+    }
 
+    public void setType(DesignPatternType type) {
+        this.type = type.getID();
+    }
+    public String getTypeAsString() throws IOException, JDOMException {
+        return Utility.getDesignType(this.type).getType();
+    }
+
+    public void setTypeAsString(String typeAsString) {
+        this.typeAsString = typeAsString;
+    }
 
     @Override
     public String toString() {
@@ -112,6 +125,8 @@ public class DesignPattern {
                 '}';
     }
 }
+
+
 
 
 

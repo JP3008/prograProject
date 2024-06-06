@@ -1,51 +1,57 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.common;
 
 import cr.ac.ucr.progra2.paraiso.prograproject.cliente.Cliente;
+import cr.ac.ucr.progra2.paraiso.prograproject.data.DesignPatternData;
+import cr.ac.ucr.progra2.paraiso.prograproject.domain.DesignPattern;
+import cr.ac.ucr.progra2.paraiso.prograproject.util.Utility;
+import org.jdom2.JDOMException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleServerThread extends Thread{
+    private Socket clientSocket;
 
-        private Socket socket;
+    public MultipleServerThread(Socket clientSocket) {
+        this.clientSocket = clientSocket;
+    }
 
-        public MultipleServerThread(Socket socket) {
-            super("MultiServidorHilo");
-            this.socket = socket;
-        }
+    @Override
+    public void run() {
+        try (ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+             ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream())) {
 
-        public void run() {
+            // Leer el DesignPattern enviado por el cliente
+            DesignPattern dp = (DesignPattern) ois.readObject();
+            PatronesProtocol protocol = new PatronesProtocol(new ArrayList<>());
 
-            PrintWriter writer;
+            // Procesar y guardar el DesignPattern en el XML
+            DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
+            data.addDesign(dp);
+
+            String response = protocol.procesarEntrada(dp);
+
+            // Enviar la respuesta al cliente
+            oos.writeObject(response);
+            System.out.println("Respuesta enviada al cliente: " + response);
+
+        } catch (IOException | ClassNotFoundException | JDOMException e) {
+            e.printStackTrace();
+        } finally {
             try {
-                writer = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        socket.getInputStream()));
-                PatronesProtocol protocolo = new PatronesProtocol();
-                String salida = protocolo.procesarEntrada(null);
-                writer.println(salida);
-                String entrada = null;
-                while ((entrada = reader.readLine()) != null) {
-                    salida = protocolo.procesarEntrada(entrada);
-                    writer.println(salida);
-                    if (salida.equals("Adios."))
-                        break;
-                }// while
-                writer.close();
-                reader.close();
-                socket.close();
+                clientSocket.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
-        }// run
-
-
-
-
+        }
     }
+}
+
+
+
+
+
+
+

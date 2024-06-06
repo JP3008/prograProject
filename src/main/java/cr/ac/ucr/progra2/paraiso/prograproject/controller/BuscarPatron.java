@@ -29,23 +29,11 @@ public class BuscarPatron
     @FXML
     private BorderPane bp;
     @FXML
-    private Button searchButton;
-    @FXML
     private Button buttonBack;
     @FXML
     private Button modifyButton;
-    @FXML
-    private Label labelID;
-    @FXML
-    private ComboBox comboBoxIDList;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private Alert deleting = new Alert(Alert.AlertType.CONFIRMATION);
-    @FXML
-    private Button buttonDelete;
-    @FXML
-    private Label problemLabel2;
-    @FXML
-    private ImageView designImageView;
     public int saveId;
     @FXML
     private TextField solutionLabel;
@@ -64,6 +52,26 @@ public class BuscarPatron
     @FXML
     private Label typeLabel;
     private File selectedFile;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private Button buttonDelete;
+    @FXML
+    private ImageView designImageView;
+    @FXML
+    private ComboBox cbFilter;
+    @FXML
+    private Button filterButton;
+    @FXML
+    private ComboBox comboBoxIDList;
+
+    DesignPatternTypeData dataType = new DesignPatternTypeData(String.valueOf(Utility.usualTypeFile()));
+    DesignPatternData dataDesign = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
+    @FXML
+    private Button removeFilterButton;
+
+    public BuscarPatron() throws IOException, JDOMException {
+    }
 
     private void loadPage(String page){
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(page));
@@ -78,16 +86,18 @@ public class BuscarPatron
 
     @FXML
     public void initialize() throws IOException, JDOMException {
-        DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
+
         this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
         comboBoxIDList.setItems(options);
+
         modifyButton.setDisable(true);
         buttonDelete.setDisable(true);
 
 
-        DesignPatternTypeData dataType = new DesignPatternTypeData(String.valueOf(Utility.usualTypeFile()));
         ObservableList<DesignPatternType> optionsType = FXCollections.observableArrayList(dataType.findAll());
+        cbFilter.setItems(optionsType);
         comboBoxType.setItems(optionsType);
+
 
     }
 
@@ -186,6 +196,10 @@ public class BuscarPatron
             selectButton.setVisible(true);
             searchButton.setDisable(true);
 
+            cbFilter.setDisable(true);
+            filterButton.setDisable(true);
+            removeFilterButton.setDisable(true);
+
             modifyButton.setText("Aceptar");
             buttonBack.setText("Cancelar");
             modifying=true;
@@ -198,58 +212,64 @@ public class BuscarPatron
             DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
 
 
+            if (!problemLabel.getText().isEmpty() && !solutionLabel.getText().isEmpty() && !contextLabel.getText().isEmpty() && !exampleLabel.getText().isEmpty() && comboBoxType.getValue() != null) {
 
-                if (!problemLabel.getText().isEmpty() && !solutionLabel.getText().isEmpty() && !contextLabel.getText().isEmpty() && !exampleLabel.getText().isEmpty() && comboBoxType.getValue() != null) {
+                dp.setDesignID((Integer) comboBoxIDList.getValue());
+                dp.setContext(contextLabel.getText());
+                dp.setProblem(problemLabel.getText());
+                dp.setSolution(solutionLabel.getText());
 
-                    dp.setDesignID((Integer) comboBoxIDList.getValue());
-                    dp.setContext(contextLabel.getText());
-                    dp.setProblem(problemLabel.getText());
-                    dp.setSolution(solutionLabel.getText());
+                dp.setExample(exampleLabel.getText());
 
-                    dp.setExample(exampleLabel.getText());
+                if (fileExploring) {
+                    dp.setImage(String.valueOf(selectedFile));
+                }else{
+                    dp.setImageAs64(imgSave64);
 
-                    if (fileExploring) {
-                        dp.setImage(String.valueOf(selectedFile));
-                    }else{
-                        dp.setImageAs64(imgSave64);
+                }
 
-                    }
+                if (comboBoxType.getValue()!=null) {
+                    dp.setType((DesignPatternType) comboBoxType.getValue());
+                    data.modifyDesign((Integer) comboBoxIDList.getValue(), dp);
 
-                    if (comboBoxType.getValue()==null) {
-                        dp.setType((DesignPatternType) comboBoxType.getValue());
-                        data.modifyDesign((Integer) comboBoxIDList.getValue(), dp);
+                    alert.setContentText("Design changed!");
+                    alert.showAndWait();
+                    //Copiar esto
+                    modifying = false;
 
-                        alert.setContentText("Design changed!");
-                        alert.showAndWait();
-                        //Copiar esto
-                        modifying = false;
-
-                        comboBoxIDList.setDisable(false);
-                        problemLabel.setEditable(false);
-                        contextLabel.setEditable(false);
-                        solutionLabel.setEditable(false);
-                        exampleLabel.setEditable(false);
-                        typeLabel.setVisible(true);
-                        comboBoxType.setVisible(false);
-                        selectButton.setVisible(false);
-                        searchButton.setDisable(false);
-
-                        modifyButton.setText("Modificar");
-                        buttonBack.setText("Página principal");
-
-                        searchOnAction(actionEvent);
-                        comboBoxType.setValue(typeLabel.getText());
-                        fileExploring=false;
-                    }else {
-                        alert.setContentText("Information missing!");
-                        alert.showAndWait();
-                    }
+                    comboBoxIDList.setDisable(false);
+                    problemLabel.setEditable(false);
+                    contextLabel.setEditable(false);
+                    solutionLabel.setEditable(false);
+                    exampleLabel.setEditable(false);
+                    typeLabel.setVisible(true);
+                    comboBoxType.setVisible(false);
+                    selectButton.setVisible(false);
+                    searchButton.setDisable(false);
 
 
-                } else {
+                    cbFilter.setDisable(false);
+                    filterButton.setDisable(false);
+                    removeFilterButton.setDisable(false);
+
+
+                    modifyButton.setText("Modificar");
+                    buttonBack.setText("Página principal");
+
+                    searchOnAction(actionEvent);
+
+                    comboBoxType.setValue(typeLabel.getText());
+                    fileExploring=false;
+                }else {
                     alert.setContentText("Information missing!");
                     alert.showAndWait();
                 }
+
+
+            } else {
+                alert.setContentText("Information missing!");
+                alert.showAndWait();
+            }
 
         }
     }
@@ -266,49 +286,107 @@ public class BuscarPatron
 
             data.deleteDesign((Integer) comboBoxIDList.getValue());
 
-        comboBoxIDList.setValue(null);
-        designImageView.setImage(null);
-        problemLabel.setText("");
-        contextLabel.setText("");
-        exampleLabel.setText("");
-        typeLabel.setText("");
-        solutionLabel.setText("");
-        modifyButton.setDisable(true);
-        buttonDelete.setDisable(true);
-        this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
-        comboBoxIDList.setItems(options);
+            comboBoxIDList.setValue(null);
+            designImageView.setImage(null);
+            problemLabel.setText("");
+            contextLabel.setText("");
+            exampleLabel.setText("");
+            typeLabel.setText("");
+            solutionLabel.setText("");
+            modifyButton.setDisable(true);
+            buttonDelete.setDisable(true);
+
+            this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
+            comboBoxIDList.setItems(options);
+
+            ObservableList<Integer> list = FXCollections.observableArrayList(dataDesign.getTypesID((String) cbFilter.getValue()));
+            cbFilter.setItems(list);
+
 
         }
+    }
+
+    private void restore(DesignPattern dp) throws IOException, JDOMException {
+
+        comboBoxIDList.setValue(dp.getDesignID());
+        designImageView.setImage(Utility.decode(dp.getImage()));
+        contextLabel.setText(dp.getContext());
+        problemLabel.setText(dp.getProblem());
+        exampleLabel.setText(dp.getExample());
+        solutionLabel.setText(dp.getSolution());
+        typeLabel.setText(dp.getTypeAsString());
+
+        ObservableList<Integer> list = FXCollections.observableArrayList(dataDesign.getTypesID((String) cbFilter.getValue()));
+        cbFilter.setItems(list);
+
     }
 
     @FXML
     public void selectOnAction(ActionEvent actionEvent) {
 
-            fileExploring=true;
+        fileExploring=true;
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("PNG Files", "*.png"),
-                    new FileChooser.ExtensionFilter("JPG Files", "*.jpg"),
-                    new FileChooser.ExtensionFilter("WEBP Files", "*.webp")
-            );
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG Files", "*.png"),
+                new FileChooser.ExtensionFilter("JPG Files", "*.jpg"),
+                new FileChooser.ExtensionFilter("WEBP Files", "*.webp")
+        );
 
-            fileChooser.setTitle("Select Image File");
-            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setTitle("Select Image File");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
-            // Get the current stage from any component
-            Stage stage = (Stage) bp.getScene().getWindow();
-            selectedFile = fileChooser.showOpenDialog(stage);
+        // Get the current stage from any component
+        Stage stage = (Stage) bp.getScene().getWindow();
+        selectedFile = fileChooser.showOpenDialog(stage);
 
 
 
-            if (selectedFile == null) {
-                selectedFile=null;
-            }else{
-                selectButton.setText("Cargado!");
-                designImageView.setImage(new Image(selectedFile.toString()));
-            }
+        if (selectedFile == null) {
+            selectedFile=null;
+        }else{
+            selectButton.setText("Cargado!");
+            designImageView.setImage(new Image(selectedFile.toString()));
+        }
 
     }
 
+    @FXML
+    public void filteringOnAction(ActionEvent actionEvent) {
+        buttonDelete.setDisable(true);
+        modifyButton.setDisable(true);
+        comboBoxIDList.setValue(null);
+    }
+
+
+    @FXML
+    public void SearchingOnAction(ActionEvent actionEvent) {
+        buttonDelete.setDisable(true);
+        modifyButton.setDisable(true);
+    }
+
+    @FXML
+    public void filterButton(ActionEvent actionEvent) throws IOException, JDOMException {
+        if (cbFilter.getValue()!=null) {
+            String typeFilter = cbFilter.getValue().toString();
+
+            List<Integer> list = dataDesign.getTypesID(typeFilter);
+
+            this.options = FXCollections.observableArrayList(list);
+            comboBoxIDList.setItems(options);
+        }else{
+            alert.setContentText("Debe de seleccionar un filtro de tipo");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void removeFilterOnAction(ActionEvent actionEvent) {
+
+        cbFilter.setValue(null);
+        this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
+        comboBoxIDList.setItems(options);
+
+
+    }
 }

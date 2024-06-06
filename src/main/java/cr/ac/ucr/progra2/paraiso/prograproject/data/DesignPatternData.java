@@ -15,59 +15,49 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DesignPatternData {
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.XMLOutputter;
 
-    //Attributes
-    private String routeDocument;
+public class DesignPatternData {
     private Element root;
     private Document doc;
+    private String routeDocument;
 
-    //Constructor
     public DesignPatternData(String routeDocument) throws IOException, JDOMException {
-
         File file = new File(routeDocument);
 
-
-        //Different caases of file existing or not
-        if (!file.exists()){
-
+        if (!file.exists()) {
             this.routeDocument = routeDocument;
             this.root = new Element("Designs");
-            this.doc= new Document(root);
+            this.doc = new Document(root);
             save();
-
-        }else{
+        } else {
             SAXBuilder saBuilder = new SAXBuilder();
             saBuilder.setIgnoringElementContentWhitespace(true);
             this.doc = saBuilder.build(new File(routeDocument));
             this.root = doc.getRootElement();
             this.routeDocument = routeDocument;
-
         }
-
-
     }
 
-
-    //Writes the Design into the XML
     private void save() throws IOException {
-
         XMLOutputter xmlOutputter = new XMLOutputter();
-        xmlOutputter.output(this.doc,new PrintWriter(this.routeDocument));
-        //System.out.println("Elemento guardado!");
-        //xmlOutputter.output(this.doc,System.out);
-
+        xmlOutputter.output(this.doc, new PrintWriter(this.routeDocument));
     }
 
-    //Creating the design
     private void createDesign(DesignPattern DP) throws IOException {
         Element mDesign = new Element("Design");
+        mDesign.setAttribute("ID", String.valueOf(DP.getDesignID()));
+        mDesign.setAttribute("typeID", String.valueOf(DP.getType()));
 
-        //We define ID and Classs as defining values as these are the atributes by wich the file will be searched
-        mDesign.setAttribute("ID",String.valueOf(DP.getDesignID())); //Para hacerlo un atributo
-        mDesign.setAttribute("typeID",String.valueOf(DP.getType()));
-
-        //Adding content
         Element eContext = new Element("Context");
         eContext.addContent(DP.getContext());
 
@@ -83,61 +73,45 @@ public class DesignPatternData {
         Element eImage = new Element("Image");
         eImage.addContent(DP.getImage());
 
-
-        //Adding all content to the main element
         mDesign.addContent(eContext);
         mDesign.addContent(eProblem);
         mDesign.addContent(eSolution);
         mDesign.addContent(eExample);
         mDesign.addContent(eImage);
 
-        //Rooted and saved
-        root.addContent(mDesign);//Se añade a la raíz
+        root.addContent(mDesign);
         save();
-
     }
 
-    //Method to be instantiated to add a given Design Pattern Object
-    public void addDesign(DesignPattern DP){
-
+    public void addDesign(DesignPattern DP) {
         try {
-            DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));//Gets the usual saveFile
-            data.createDesign(DP); //Creates the design
+            createDesign(DP);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } catch (JDOMException e) {
-            throw new RuntimeException(e);
         }
-
     }
 
-
-
-
     public String deleteDesign(int code) throws IOException {
-
         boolean deleted = false;
         List<Element> list = root.getChildren("Design");
         for (Element design : list) {
-            String current =design.getAttributeValue("ID");
+            String current = design.getAttributeValue("ID");
             if (current.equals(String.valueOf(code))) {
                 root.removeContent(design);
-                deleted=true;
+                deleted = true;
                 save();
                 break;
             }
         }
 
-        if (deleted){
-            return "The design "+code+" has been deleted";
-        }else{
+        if (deleted) {
+            return "The design " + code + " has been deleted";
+        } else {
             return "ID not found";
         }
     }
 
-
     public void modifyDesign(int code, DesignPattern newPattern) throws IOException {
-
         Element save = null;
         List<Element> list = root.getChildren("Design");
         for (Element design : list) {
@@ -148,7 +122,7 @@ public class DesignPatternData {
             }
         }
 
-        if (save!=null){
+        if (save != null) {
             save.getAttribute("typeID").setValue(String.valueOf(newPattern.getType()));
             save.getChild("Context").setText(newPattern.getContext());
             save.getChild("Problem").setText(newPattern.getProblem());
@@ -157,13 +131,10 @@ public class DesignPatternData {
             save.getChild("Image").setText(newPattern.getImage());
 
             save();
-
         }
-
     }
 
     public DesignPattern xmlToObject(int code) {
-
         Element save = null;
         List<Element> list = root.getChildren("Design");
         for (Element design : list) {
@@ -174,9 +145,8 @@ public class DesignPatternData {
             }
         }
 
-        if (save!=null) {
+        if (save != null) {
             DesignPattern design = new DesignPattern();
-
             design.setDesignID(Integer.parseInt(save.getAttributeValue("ID")));
             design.setTypeAsNumber(Integer.parseInt(save.getAttributeValue("typeID")));
             design.setContext(save.getChildText("Context"));
@@ -184,25 +154,43 @@ public class DesignPatternData {
             design.setProblem(save.getChildText("Problem"));
             design.setExample(save.getChildText("Example"));
             design.setImageAs64(save.getChildText("Image"));
-
             return design;
-        }else{
+        } else {
             return null;
         }
-
     }
 
-    public List<DesignPattern> getAll(){
+    public List<DesignPattern> getAll() {
         List<Element> data = root.getChildren();
         List<DesignPattern> designs = new ArrayList<>();
         DesignPattern aux = null;
-        for (int i = 1; i <=Utility.getMaxID(Utility.usualDataFile()); i++) {
-           if (xmlToObject(i)!=null) {
-               aux = xmlToObject(i);
-               designs.add(aux);
-           }
+        for (int i = 1; i <= Utility.getMaxID(Utility.usualDataFile()); i++) {
+            if (xmlToObject(i) != null) {
+                aux = xmlToObject(i);
+                designs.add(aux);
+            }
         }
         return designs;
     }
 
+    public List<Integer> getTypesID(String name) throws IOException, JDOMException {
+
+        List<Integer> types = new ArrayList<>();
+        List<Element> elementList= root.getChildren("Design");
+        for (Element element : elementList) {
+
+            int saveInt = Integer.parseInt(element.getAttributeValue("typeID"));
+
+            DesignPatternTypeData dataType = new DesignPatternTypeData(String.valueOf(Utility.usualTypeFile()));
+            String typeName = dataType.xmlToObject(saveInt).getType();
+
+            if (name.equals(typeName)){
+                int saveID = Integer.parseInt(element.getAttributeValue("ID"));
+                types.add(saveID);
+            }
+
+        }
+        return types;
+    }
 }
+

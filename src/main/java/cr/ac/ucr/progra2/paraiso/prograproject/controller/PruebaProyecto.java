@@ -16,6 +16,7 @@ import java.net.UnknownHostException;
 
 public class PruebaProyecto
 {
+    /*
     @javafx.fxml.FXML
     private BorderPane bp;
     @javafx.fxml.FXML
@@ -65,5 +66,6 @@ public class PruebaProyecto
     public void paginaPrincipal(ActionEvent actionEvent) {
         loadPage("paginaPrincipal.fxml");
     }
+    */
 
 }

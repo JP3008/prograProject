@@ -1,41 +1,58 @@
 package cr.ac.ucr.progra2.paraiso.prograproject.cliente;
 
-import java.io.BufferedReader;
+import cr.ac.ucr.progra2.paraiso.prograproject.HelloApplication;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetAddress;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
+import java.io.*;
+import java.net.*;
 
-public class Cliente {
-    public static void main(String[] args) throws UnknownHostException {
+public class Cliente extends Thread { //hilo para INTERFAZ
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int SERVER_PORT = 12345;
 
-        Socket echoSocket = null;
-        PrintWriter writer = null;
-        BufferedReader reader = null;
+    @Override
+    public void run() {
+        try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
 
+            System.out.println("Cliente conectado al servidor.");
 
-        try {
-            echoSocket = new Socket("localhost",9999);
-            writer = new PrintWriter(echoSocket.getOutputStream(),true);
-            reader = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-            String entrada = reader.readLine();
-            System.out.println("Server: " + entrada);
-            String salida;
-            BufferedReader keyboardReader = new BufferedReader(new InputStreamReader(System.in));
-            while ((salida = keyboardReader.readLine()) != null){
-                writer.println(salida);
-                entrada = reader.readLine();
-                System.out.println("Server:" + entrada);
-            }//while
-            reader.close();
-            writer.close();
-            keyboardReader.close();
-            echoSocket.close();
-        }catch (IOException io){
-            io.printStackTrace();
+            // Espera hasta que el usuario cierre la interfaz para salir
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                // Leer la entrada del usuario
+                System.out.print("Ingrese 'exit' para cerrar el cliente o un patrón para enviar al servidor: ");
+                String input = scanner.nextLine();
+
+                // Enviar la entrada al servidor
+                oos.writeObject(input);
+
+                if ("exit".equalsIgnoreCase(input)) {
+                    break; // Salir del bucle si el usuario ingresa "exit"
+                }
+
+                // Leer la respuesta del servidor y mostrarla
+                String response = (String) ois.readObject();
+                System.out.println("Respuesta del servidor: " + response);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
+        System.out.println("Cliente cerrado.");
+    }
+
+    public static void main(String[] args) {
+        Cliente cliente = new Cliente();
+        cliente.start();
+        HelloApplication.main(new String[]{});
     }
 }
+
+

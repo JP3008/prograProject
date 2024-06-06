@@ -20,6 +20,8 @@ public class PaginaPrincipal {
     private BorderPane bp;
     @FXML
     private Button botonPrueba;
+    @FXML
+    private Button botonBuscar1;
 
     private void loadPage(String page){
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(page));
@@ -34,7 +36,7 @@ public class PaginaPrincipal {
     public void initialize() {
     }
 
-    @FXML
+    @Deprecated
     public void buscar(ActionEvent actionEvent) {
         loadPage("buscarPatron.fxml");
     }
@@ -53,5 +55,14 @@ public class PaginaPrincipal {
     @FXML
     public void pruebaUno(ActionEvent actionEvent) {
         loadPage("pruebaProyecto.fxml");
+    }
+
+    @FXML
+    public void buscarParaModificar(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    public void busqueda(ActionEvent actionEvent) {loadPage("busqueda.fxml");
     }
 }

@@ -15,10 +15,16 @@ public class PatronesProtocol {
 
     public PatronesProtocol() throws IOException {
         patterns = new ArrayList<>();
-        //DesignPatternClass designPatternClass = new DesignPatternClass(111)
-        //patterns.add(new DesignPattern(,"Context One", "Problem One", "Solution One", "Example One", , "Image"));
-        //patterns.add(new DesignPattern(111,"Context Two", "Problem Two", "Solution Two", "Example Two", "Structural", "Image"));
-        //patterns.add(new DesignPattern(111,"Context Three", "Problem Three", "Solution Three", "Example Three", "Behavioral", "Image"));
+    }
+
+    public String procesarEntrada(DesignPattern dp) {
+        if (dp == null) {
+            return "DesignPattern es nulo.";
+        }
+
+        // Procesar y añadir el DesignPattern a la lista
+        patterns.add(dp);
+        return "DesignPattern añadido: " + dp.toString();
     }
 
     public String procesarEntrada(String entrada) {
@@ -38,4 +44,6 @@ public class PatronesProtocol {
         }
     }
 }
+
+
 
