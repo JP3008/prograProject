@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.PaginaPrincipal">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.PaginaPrincipal">
    <center>
       <AnchorPane prefHeight="652.0" prefWidth="1173.0" style="-fx-background-color: #e0d4c3;" BorderPane.alignment="CENTER">
          <children>
@@ -63,7 +63,7 @@
                         <Image url="@ordenar.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="365.0" layoutY="224.0" prefHeight="28.0" prefWidth="412.0" text="Aqui va el lema">
+                  <Label layoutX="459.0" layoutY="223.0" prefHeight="28.0" prefWidth="220.0" text="Designing tomorrow, today!">
                      <font>
                         <Font name="Century Gothic" size="16.0" />
                      </font>

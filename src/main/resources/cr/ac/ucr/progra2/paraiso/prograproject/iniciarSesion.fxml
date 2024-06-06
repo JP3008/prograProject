@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.IniciarSesion">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.ucr.progra2.paraiso.prograproject.controller.IniciarSesion">
    <center>
       <AnchorPane prefHeight="652.0" prefWidth="1173.0" BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +35,7 @@
                               <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="113.0" layoutY="138.0" prefHeight="46.0" prefWidth="315.0">
+                        <TextField fx:id="tfUser" layoutX="113.0" layoutY="138.0" prefHeight="46.0" prefWidth="315.0">
                            <effect>
                               <InnerShadow color="#03223f" />
                            </effect>
@@ -45,7 +45,7 @@
                               <Font name="Century Gothic Bold" size="25.0" />
                            </font>
                         </Label>
-                        <PasswordField layoutX="117.0" layoutY="252.0" prefHeight="45.0" prefWidth="315.0">
+                        <PasswordField fx:id="tfPassword" layoutX="117.0" layoutY="252.0" prefHeight="45.0" prefWidth="315.0">
                            <effect>
                               <InnerShadow color="#03223f" />
                            </effect>

@@ -91,6 +91,7 @@ public class CrearTipo
             buttonInsert1.setDisable(true);
             textFieldName.setEditable(true);
             deleteButton.setText("Cancelar");
+            modifyButton.setText("Aceptar");
             isModifying=true;
 
         }else{
@@ -108,6 +109,7 @@ public class CrearTipo
                 buttonInsert1.setDisable(false);
                 buttonSearch.setDisable(false);
                 deleteButton.setText("Eliminar");
+                modifyButton.setText("Modificar");
 
                 isModifying = false;
 
@@ -141,6 +143,7 @@ public class CrearTipo
             alert.showAndWait();
 
             textFieldType.setText("");
+            searchComboBox.setValue("");
 
             this.options= FXCollections.observableArrayList(Utility.getIDList(Utility.usualTypeFile()));
             searchComboBox.setItems(options);
@@ -180,6 +183,7 @@ public class CrearTipo
             buttonSearch.setDisable(false);
             buttonInsert1.setDisable(false);
             deleteButton.setText("Eliminar");
+            modifyButton.setText("Modificar");
             textFieldName.setText(saveName);
             textFieldName.setEditable(false);
             isModifying=false;
@@ -212,5 +216,6 @@ public class CrearTipo
 
     @javafx.fxml.FXML
     public void searchingOnAction(ActionEvent actionEvent) {
+        textFieldName.setText("");
     }
 }

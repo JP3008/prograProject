@@ -82,21 +82,22 @@ public class BuscarPatron
         }
     }
 
-    ObservableList<Integer> options;
+    ObservableList<Integer> cbIDOptions;
+    ObservableList<DesignPatternType> cbTypeOptions;
 
     @FXML
     public void initialize() throws IOException, JDOMException {
 
-        this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
-        comboBoxIDList.setItems(options);
+        this.cbIDOptions = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
+        comboBoxIDList.setItems(cbIDOptions);
 
         modifyButton.setDisable(true);
         buttonDelete.setDisable(true);
 
 
-        ObservableList<DesignPatternType> optionsType = FXCollections.observableArrayList(dataType.findAll());
-        cbFilter.setItems(optionsType);
-        comboBoxType.setItems(optionsType);
+        this.cbTypeOptions = FXCollections.observableArrayList(dataType.findAll());
+        cbFilter.setItems(cbTypeOptions);
+        comboBoxType.setItems(cbTypeOptions);
 
 
     }
@@ -209,7 +210,6 @@ public class BuscarPatron
 
         }else{
             DesignPattern dp = new DesignPattern();
-            DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
 
 
             if (!problemLabel.getText().isEmpty() && !solutionLabel.getText().isEmpty() && !contextLabel.getText().isEmpty() && !exampleLabel.getText().isEmpty() && comboBoxType.getValue() != null) {
@@ -230,35 +230,18 @@ public class BuscarPatron
 
                 if (comboBoxType.getValue()!=null) {
                     dp.setType((DesignPatternType) comboBoxType.getValue());
-                    data.modifyDesign((Integer) comboBoxIDList.getValue(), dp);
+                    dataDesign.modifyDesign((Integer) comboBoxIDList.getValue(), dp);
 
                     alert.setContentText("Design changed!");
                     alert.showAndWait();
                     //Copiar esto
                     modifying = false;
 
-                    comboBoxIDList.setDisable(false);
-                    problemLabel.setEditable(false);
-                    contextLabel.setEditable(false);
-                    solutionLabel.setEditable(false);
-                    exampleLabel.setEditable(false);
-                    typeLabel.setVisible(true);
-                    comboBoxType.setVisible(false);
-                    selectButton.setVisible(false);
-                    searchButton.setDisable(false);
-
-
-                    cbFilter.setDisable(false);
-                    filterButton.setDisable(false);
-                    removeFilterButton.setDisable(false);
-
+                    restore();
 
                     modifyButton.setText("Modificar");
                     buttonBack.setText("Página principal");
 
-                    searchOnAction(actionEvent);
-
-                    comboBoxType.setValue(typeLabel.getText());
                     fileExploring=false;
                 }else {
                     alert.setContentText("Information missing!");
@@ -277,47 +260,54 @@ public class BuscarPatron
     @FXML
     public void deleteOnAction(ActionEvent actionEvent) throws IOException, JDOMException {
 
-        DesignPatternData data = new DesignPatternData(String.valueOf(Utility.usualDataFile()));
 
         deleting.setContentText("Are you sure you want to delete this pattern?");
         Optional<ButtonType> result = deleting.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
 
-            data.deleteDesign((Integer) comboBoxIDList.getValue());
+            dataDesign.deleteDesign((Integer) comboBoxIDList.getValue());
 
-            comboBoxIDList.setValue(null);
-            designImageView.setImage(null);
-            problemLabel.setText("");
-            contextLabel.setText("");
-            exampleLabel.setText("");
-            typeLabel.setText("");
-            solutionLabel.setText("");
-            modifyButton.setDisable(true);
-            buttonDelete.setDisable(true);
-
-            this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
-            comboBoxIDList.setItems(options);
-
-            ObservableList<Integer> list = FXCollections.observableArrayList(dataDesign.getTypesID((String) cbFilter.getValue()));
-            cbFilter.setItems(list);
-
+            restore();
 
         }
     }
 
-    private void restore(DesignPattern dp) throws IOException, JDOMException {
+    private void restore() throws IOException, JDOMException {
 
-        comboBoxIDList.setValue(dp.getDesignID());
-        designImageView.setImage(Utility.decode(dp.getImage()));
-        contextLabel.setText(dp.getContext());
-        problemLabel.setText(dp.getProblem());
-        exampleLabel.setText(dp.getExample());
-        solutionLabel.setText(dp.getSolution());
-        typeLabel.setText(dp.getTypeAsString());
+        this.cbIDOptions = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
+        comboBoxIDList.setItems(cbIDOptions);
+        this.cbTypeOptions = FXCollections.observableArrayList(dataType.findAll());
+        cbFilter.setItems(cbTypeOptions);
+        comboBoxType.setItems(cbTypeOptions);
 
-        ObservableList<Integer> list = FXCollections.observableArrayList(dataDesign.getTypesID((String) cbFilter.getValue()));
-        cbFilter.setItems(list);
+        comboBoxIDList.setValue(null);
+        comboBoxType.setValue(null);
+        cbFilter.setValue(null);
+
+
+        designImageView.setImage(null);
+        problemLabel.setText("");
+        contextLabel.setText("");
+        exampleLabel.setText("");
+        typeLabel.setText("");
+        solutionLabel.setText("");
+
+        comboBoxIDList.setDisable(false);
+        problemLabel.setEditable(false);
+        contextLabel.setEditable(false);
+        solutionLabel.setEditable(false);
+        exampleLabel.setEditable(false);
+        typeLabel.setVisible(true);
+        comboBoxType.setVisible(false);
+        selectButton.setVisible(false);
+        searchButton.setDisable(false);
+
+        cbFilter.setDisable(false);
+        filterButton.setDisable(false);
+        removeFilterButton.setDisable(true);
+
+
 
     }
 
@@ -365,27 +355,34 @@ public class BuscarPatron
         modifyButton.setDisable(true);
     }
 
+
+    //Añadir el filtro
     @FXML
     public void filterButton(ActionEvent actionEvent) throws IOException, JDOMException {
         if (cbFilter.getValue()!=null) {
-            String typeFilter = cbFilter.getValue().toString();
 
+            String typeFilter = cbFilter.getValue().toString();
             List<Integer> list = dataDesign.getTypesID(typeFilter);
 
-            this.options = FXCollections.observableArrayList(list);
-            comboBoxIDList.setItems(options);
+            this.cbIDOptions = FXCollections.observableArrayList(list);
+            comboBoxIDList.setItems(cbIDOptions);
+            //Va a mostrar solo los id con la opción seleccionada
+
+            filterButton.setText("Filtrando");
+            removeFilterButton.setDisable(false);
         }else{
             alert.setContentText("Debe de seleccionar un filtro de tipo");
             alert.showAndWait();
         }
     }
 
+    //Quitar el filtro
     @FXML
     public void removeFilterOnAction(ActionEvent actionEvent) {
 
         cbFilter.setValue(null);
-        this.options = FXCollections.observableArrayList(Utility.getIDList(Utility.usualDataFile()));
-        comboBoxIDList.setItems(options);
+        filterButton.setText("Filtrar");
+        removeFilterButton.setDisable(true);
 
 
     }
