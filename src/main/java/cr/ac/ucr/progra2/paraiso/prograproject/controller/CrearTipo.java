@@ -209,4 +209,8 @@ public class CrearTipo
 
         }
     }
+
+    @javafx.fxml.FXML
+    public void searchingOnAction(ActionEvent actionEvent) {
+    }
 }
