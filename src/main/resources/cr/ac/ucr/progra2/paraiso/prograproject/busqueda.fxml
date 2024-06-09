@@ -105,11 +105,6 @@
                               </Button>
                            </children>
                         </HBox>
-                        <Label text="Id del patrón:" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Century Gothic Bold" size="25.0" />
-                           </font>
-                        </Label>
                         <Label text="Filtrar:">
                            <font>
                               <Font name="Century Gothic Bold" size="25.0" />
